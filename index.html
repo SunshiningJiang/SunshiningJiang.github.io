@@ -73,13 +73,13 @@
       
         <p>PRML(Pattern Recognition and Machine Learning)这本书正式开始阅读是从去年九月份。从一开始看的晕晕乎乎，到现在能够看进去，这中间也走了不少弯路。现在重新读一遍，跟随着Toronto大学的<a href="http://www.cs.toronto.edu/~rsalakhu/STA4273_2015/" target="_blank" rel="external">统计机器学习</a>课程，以此blog记录一下阅读笔记。</p>
 <h2 id="ch1_Introduction">ch1 Introduction</h2><p><img src="http://ww1.sinaimg.cn/mw690/6dfbc26fjw1eqv29oa539j20nb0ebgqv.jpg" alt="Machine learning: a big picture"><br>机器学习主要分为有监督的学习和无监督学习，它们之间的区别在于target是否给定。在有监督学习中，target给定，若是离散值，比如给一张动物的图片，判断它是小狗还是小猫，这类问题是分类问题（Classification）；若取连续值，比如预测上海某个小区的房价，则是回归问题（Regression）。而在无监督学习中，target不存在，这里有density estimation, clustering, dimensionality reduction, finding hidden explanation等等任务。<br><img src="http://ww2.sinaimg.cn/mw690/6dfbc26fjw1eqv2dl7cxej20y30frq72.jpg" alt="Classification: an example"></p>
-<h3 id="ch_1-1_Exmaple:_Polynomial_Curve_Fitting">ch 1.1 Exmaple: Polynomial Curve Fitting</h3><p>我们从最简单的回归问题（曲线拟合）开始说起，Given 一系列训练数据$\left( x^{\left( 1\right) },x^{\left( 2\right) },…,x^{\left( N\right) }\right) ^{T}$, 每一个$x^{i}=x^{i}_1…x^{i}_d$。它们对应的target值$y=(y_1,…,y_N)^{T}$。我们认为$x$与$y$的关系是线性关系，因此，我们对每一个$x^{\left( i \right)}$的预测值<br>$${y(x^{\left( i \right)},w) = \left( x^{\left( i \right)} \right)^{T}w}$$<br>这里我们可以写成<br>$${y(X,w) = N^{T}w}$$<br>注意$X$是一个$X \times \left( d+1 \right)$的矩阵。<br>我们希望通过最小化一个loss function来获得最好的$w$，在这里定义loss function$E\left( w \right)$为squred error，<br>$$E\left( w \right) = \frac{1}{2} (Xw - y)^{T}(Xw - y)$$<br>如果$X^{T}X$是非奇异的矩阵，我们可以求出最优解<br>$$w^{*} = \left( X^{T}X \right)^{-1}X^{T}y$$<br>但是在实际中如果N很大，这里矩阵运算将非常耗时。在matlab下面做了个实验，当N=10000时，只是做$X^{T}X$就要耗时13秒。显然这种方法在大规模实际应用中不可取。<br>另外，这里的linear models是指关于coeffients $w$的线性函数，而不是关于$x$的线性函数。<br>好的，既然已经有了线性模型的解决方法，我们用它来对一个$\sin \left( 2\pi x\right)$进行拟合。我们从这个函数中sampling出来一些data，如下图<br><img src="http://ww2.sinaimg.cn/mw690/6dfbc26fjw1eqvt3fb3v2j20ak07v74e.jpg" alt="$\sin \left( 2\pi x\right)$"><br>我们用一个多项式的函数来拟合这些数据，</p>
+<h3 id="ch_1-1_Exmaple:_Polynomial_Curve_Fitting">ch 1.1 Exmaple: Polynomial Curve Fitting</h3><p>我们从最简单的回归问题（曲线拟合）开始说起，Given 一系列训练数据$\left( x^{\left( 1\right) },x^{\left( 2\right) },…,x^{\left( N\right) }\right) ^{T}$, 每一个$x^{i}=x^{i}_1…x^{i}_d$。它们对应的target值$y=(y_1,…,y_N)^{T}$。我们认为$x$与$y$的关系是线性关系，因此，我们对每一个$x^{\left( i \right)}$的预测值<br>$${y(x^{\left( i \right)},w) = \left( x^{\left( i \right)} \right)^{T}w}$$<br>这里我们可以写成<br>$${y(X,w) = X^{T}w}$$<br>注意$X$是一个$N \times \left( d+1 \right)$的矩阵。<br>我们希望通过最小化一个loss function来获得最好的$w$，在这里定义loss function$E\left( w \right)$为squred error，<br>$$E\left( w \right) = \frac{1}{2} (Xw - y)^{T}(Xw - y)$$<br>如果$X^{T}X$是非奇异的矩阵，我们可以求出最优解<br>$$w^{*} = \left( X^{T}X \right)^{-1}X^{T}y$$<br>但是在实际中如果N很大，这里矩阵运算将非常耗时。在matlab下面做了个实验，当N=10000时，只是做$X^{T}X$就要耗时13秒。显然这种方法在大规模实际应用中不可取。<br>另外，这里的linear models是指关于coeffients $w$的线性函数，而不是关于$x$的线性函数。<br>好的，既然已经有了线性模型的解决方法，我们用它来对一个$\sin \left( 2\pi x\right)$进行拟合。我们从这个函数中sampling出来一些data，如下图<br><img src="http://ww2.sinaimg.cn/mw690/6dfbc26fjw1eqvt3fb3v2j20ak07v74e.jpg" alt="$\sin \left( 2\pi x\right)$"><br>我们用一个多项式的函数来拟合这些数据，</p>
 <p>TBA…</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/05/PRML-reading-notes/" data-id="ci85htbv30007fgtsy7jo5p5z" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/05/PRML-reading-notes/" data-id="ci85hxxsv0007cstsmgc5xm1e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PRML/">PRML</a></li></ul>
@@ -113,7 +113,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/05/hello-world/" data-id="ci85htbuw0001fgtsu6pn4ncn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/05/hello-world/" data-id="ci85hxxsv0001csts7exsl8o6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -141,7 +141,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>下面是搜集的一些机器学习的课程资源：</p>
-<h2 id="1-_Machine_learning_courses">1. Machine learning courses</h2><h3 id="1-1_Introduction_to_Machine_Learning_courses">1.1 Introduction to Machine Learning courses</h3><p>Coursera上 Andrew Ng的<a href="https://www.coursera.org/learn/machine-learning" target="_blank" rel="external">machine learning</a>课，现在是self learning，可以随时学习。</p>
+<h2 id="1-_General_Machine_learning_courses">1. General Machine learning courses</h2><h3 id="1-1_Introduction_to_Machine_Learning_courses">1.1 Introduction to Machine Learning courses</h3><p>Coursera上 Andrew Ng的<a href="https://www.coursera.org/learn/machine-learning" target="_blank" rel="external">machine learning</a>课，现在是self learning，可以随时学习。</p>
 <h3 id="1-2_Machine_Learning_courses_@_Universities">1.2 Machine Learning courses @ Universities</h3><p>Andrew Ng在Stanford开设的<a href="http://cs229.stanford.edu/" target="_blank" rel="external">CS 229: Machine Learning</a>课程，notes很好，多看几遍收获很大。<br>来自Washington的Pedro Domingos在Coursera上面开设的<a href="https://www.coursera.org/course/machlearning" target="_blank" rel="external">Machine Learning</a>，Domingos大牛可谓机器学习界风云人物，发明了Sum-Product Network, Markov Logic等等模型，我等渣渣只能在大牛的脚下做一些小的improvement。</p>
 <h2 id="2-_Advanced_machine_learning_courses">2. Advanced machine learning courses</h2><p>高级机器学习课程，包括图模型，无参贝叶斯，统计机器学习理论</p>
 <h3 id="2-1_Probabilistic_Graphical_Models">2.1 Probabilistic Graphical Models</h3><p>来自CMU的Eric Xing在2014年春季开设的概率图模型：<a href="http://www.cs.cmu.edu/~epxing/Class/10708-14/lecture.html" target="_blank" rel="external">Probabilistic Graphical Models<br>(Spring 2014)</a></p>
@@ -151,7 +151,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/05/Resources-of-machine-learning/" data-id="ci85htbuz0002fgtsn31kbv4t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/05/Resources-of-machine-learning/" data-id="ci85hxxsv0002cstsc7rsndjz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/learning/">learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/machine-learning/">machine learning</a></li></ul>
