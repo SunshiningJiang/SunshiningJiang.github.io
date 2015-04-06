@@ -54,6 +54,66 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-acl-2014-tutorial-language-modeling-using-ml" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <a class="article-title" href="/2015/04/06/acl-2014-tutorial-language-modeling-using-ml/">acl-2014-tutorial-language_modeling_using_ml</a>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2015-04-06T14:28:12.000Z" itemprop="datePublished">04-06-2015</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>要做AI的project，读了一些paper和tutorial，这里做一些记录。这篇是来自牛津大学NLP组关于language modeling的tutorial。名字叫<strong>New Directions in Vector Space Models of Meaning</strong>。tutorial两个目的：</p>
+<ul>
+<li>Learning vector representations for words</li>
+<li>Learning how to compose them to get vector representations for phrases/sentences/documents<h3 id="Menu四部分:">Menu四部分:</h3></li>
+</ul>
+<ol>
+<li>Distributional Semantics</li>
+<li>Neural Distributed Representations</li>
+<li>Semantic Composition</li>
+<li>Last Words</li>
+</ol>
+<p>在这里我们对每个词用一个vector来表示。这样词与词之间的similarity关系就可以用一些距离度量函数来度量。比如<strong>Cosine Similarity</strong>:<br>$$\cos \left( x,y \right) = \frac{xy}{||x|| \times ||y||}$$<br>或者其他的相似度衡量方法:</p>
+<ul>
+<li>Euclidean Distance</li>
+<li>Lin</li>
+<li>Jaccard</li>
+<li>Dice</li>
+<li>KL divergence<br>有需要的时候再wiki一下吧。。<br>用Vector Representation看起来比较Intuitive motivated。这里分析一下好坏：</li>
+<li>Pros: Easy to obtain, vectors are interpretable</li>
+<li>Cons: Involves a large number of design choices (what weighting scheme? what similarity measure?)</li>
+<li>Problems: Going from word to sentence representations is non-trivial, and no clear intuitions exist.<br>于是问题来了，我们怎么样避免这么多种选择来解决问题？Bengio在2003年提出了用神经网络的方法来对language进行表示。<blockquote>
+<p>Twenty years ago log-linear models freed us from the shackles of simple multinomial parametrisations, but imposed the tyranny of feature engineering.</p>
+</blockquote>
+</li>
+</ul>
+<p>从基本的Log-linear model for classification开始考虑：<br>这里Feature: $\phi \left( x \right) \in R^{D}$，每一个weight$\lambda _k \in R^{D}$（$k \in {1,…K}$）。因此，我们可以如下建立模型：Given 一个instance $x$，判断其归属于哪一类的概率为：<br>$$p\left( C_k|x \right) = \frac{exp\left( \lambda _k^{T} \phi\left(x\right) \right)}{\sum_j^{k}exp\left( \lambda _j^{T} \phi \left( x\right) \right)}$$<br>Log-linear model的参数是$\lambda$，在training中我们需要计算Gradient：<br>$$\frac{\partial}{\partial \lambda_j}[-\log p\left(C_k|x \right)] = p\left(C_j|x \right)\phi \left(x \right) - \delta \left(j,k\right)\phi\left(x\right)$$<br>$\delta \left(j,k \right)$ is the Kronecker delta function which is 1 if $j = k$ and 0 otherwise。<br>有了log-linear model，我们用来提出log-linear language model：<br>Classify the next word $w_n$ given $w_n-1$, $w_n-2$</p>
+<p>TBA…</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/04/06/acl-2014-tutorial-language-modeling-using-ml/" data-id="ci861amdo0002cctsoal4cwse" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/language-modeling/">language modeling</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/machine-learning/">machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/natural-language-proccessing/">natural language proccessing</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-PRML-reading-notes" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -79,7 +139,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/05/PRML-reading-notes/" data-id="ci85hxxsv0007cstsmgc5xm1e" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/05/PRML-reading-notes/" data-id="ci861amdu000dcctslarz8228" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PRML/">PRML</a></li></ul>
@@ -113,7 +173,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/05/hello-world/" data-id="ci85hxxsv0001csts7exsl8o6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/05/hello-world/" data-id="ci861amdk0001cctszx6pc994" class="article-share-link">Share</a>
       
       
     </footer>
@@ -151,7 +211,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/05/Resources-of-machine-learning/" data-id="ci85hxxsv0002cstsc7rsndjz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/05/Resources-of-machine-learning/" data-id="ci861amds0009cctsvi7et92k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/learning/">learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/machine-learning/">machine learning</a></li></ul>
