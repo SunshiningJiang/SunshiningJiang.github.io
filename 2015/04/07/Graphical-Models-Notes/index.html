@@ -100,12 +100,14 @@
 </tbody>
 </table>
 <p>预测111的lable，这里如果我们不做什么假设的话是不可以得到lable的。</p>
-<p><strong>Markov Random Field:</strong><br>$$P\left(X\right) = \frac{1}{Z}\prod<em>(cliques c) \psi_c\left(x_c \right)$$<br>$$Z = \sum_X \prod</em>(cliques c) \psi_c\left(x_c \right)$$<br>计算Z要花费指数的时间<br>一般情况下我们用$\log$来表示$\psi \left(x \right)$<br>$$\psi_c \left(x_c \right) = exp \left(-H_c\left(x_c \right) \right)$$<br>$H_c\left(x_c \right)$是能量函数。</p>
-<p>于是$P\left(x\right) = \frac{1}{Z} exp \left(-\sum_(cliques c) H_c\left(x_c\right) \right) = \frac{1}{Z}exp{-H\left(X\right) }$<br>$H\left(X \right)$ is called “free energy”</p>
+<p><strong>Markov Random Field:</strong><br>$$P\left(X\right) = \frac{1}{Z}\prod_{cliques~c} \psi_c\left(x_c \right)$$</p>
+<p>$$Z = \sum\prod_{cliques~c} \psi_c\left(x_c \right)$$</p>
+<p>计算Z要花费指数的时间<br>一般情况下我们用$\log$来表示$\psi \left(x \right)$<br>$$\psi_c \left(x_c \right) = exp \left(-H_c\left(x_c \right) \right)$$<br>$H_c\left(x_c \right)$是能量函数。</p>
+<p>于是$P\left(x\right) = \frac{1}{Z} exp \left(-\sum_{cliques~c} H_c\left(x_c\right) \right) = \frac{1}{Z}exp\left(-H\left(X\right)\right)$<br>$H\left(X \right)$ is called “free energy”</p>
 <p><strong>Ising Models</strong></p>
-<p>Nodes are arranged in a regular topology (often a regular packing<br>grid) and connected only to their geometric neighbours.<br>Energy: $$H\left(x\right) = \sum_ij \beta_ij x_i x_j + \sum_i \alpha_i x_i$$</p>
+<p>Nodes are arranged in a regular topology (often a regular packing<br>grid) and connected only to their geometric neighbours.<br>Energy: $$H\left(x\right) = \sum<em>{ij} \beta</em>{ij} x_i x_j + \sum_i \alpha_i x_i$$</p>
 <p><strong>Relations beteen directed graph&amp; undirected graph</strong><br>两者不能相互转化。</p>
-<p><strong>Exponential Family</strong><br>很多分布都可以看成指数家族的一个特例（Uniform distribution是一个例外），定义如下：<br>$$p\left(x|\eta\right) = h\left(x\right)exp {\eta^{T}T\left(x\right) - A\left(\eta \right)}$$<br>$$p\left(x|\eta\right) = \frac{1}{Z\left(\eta \right)h\left(x\right)exp{\eta^{T} T\left(x\right) }$$</p>
+<p><strong>Exponential Family</strong><br>很多分布都可以看成指数家族的一个特例（Uniform distribution是一个例外），定义如下：<br>$$p\left(x|\eta\right) = h\left(x\right)exp \left(\eta^{T}T\left(x\right) - A\left(\eta \right)\right)$$<br>$$p\left(x|\eta\right) = \frac{1}{Z\left(\eta \right)}h\left(x\right)exp\left(\eta^{T} T\left(x\right) \right)$$</p>
 <ul>
 <li>Natural parameter $\eta$</li>
 <li>Function $T\left(x\right)$ is the sufficient statistic(Given training data, 如果知道了其sufficient statistic，这样我们就可以把原来的training数据扔掉了)</li>
@@ -116,7 +118,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/07/Graphical-Models-Notes/" data-id="ci867ir65000iu8ts6rv79kth" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/07/Graphical-Models-Notes/" data-id="ci867ow6g000i9ktseeffluig" class="article-share-link">Share</a>
       
       
     </footer>
