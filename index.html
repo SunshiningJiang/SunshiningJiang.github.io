@@ -60,12 +60,12 @@
       <header class="article-header">
         
   
-    <a class="article-title" href="/2015/04/07/Graphical-Models-Notes/">Graphical_Models_Notes</a>
+    <a class="article-title" href="/2015/04/07/Graphical-Models-Notes/">Graphical-Models-Notes</a>
   
 
       </header>
     
-    <time class="article-date" datetime="2015-04-06T18:23:26.000Z" itemprop="datePublished">04-07-2015</time>
+    <time class="article-date" datetime="2015-04-07T04:15:38.000Z" itemprop="datePublished">04-07-2015</time>
     
   </div>
   <div class="article-inner">
@@ -94,6 +94,14 @@
 <td>0</td>
 </tr>
 <tr>
+<td>011</td>
+<td>0</td>
+</tr>
+<tr>
+<td>100</td>
+<td>1</td>
+</tr>
+<tr>
 <td>111</td>
 <td>?</td>
 </tr>
@@ -115,11 +123,41 @@
 <li>Function $A\left(x\right) = \log Z\left(\eta \right)$is the log normalizer</li>
 <li>Examples: Bernoulli, binomial/geometric/negative-binomial, Poisson, gamma, multinomial, Gaussian, …</li>
 </ul>
+<p><strong>Moments</strong><br>We can easily compute moments of any exponential family<br>distribution by taking the derivatives of the log normalizer $A\left(\eta \right)$.<br>The $q^{th}$ derivative gives the $q^{th}$ centred moment.<br>$$\frac{dA\left(\eta \right)}{d \eta} = mean$$<br>$$\frac{d^{2}A\left(\eta \right)}{d^{2} \eta} = variance$$<br>当sufficient statistic是vector时，需要求偏导，而不是导数了。</p>
+<p><strong>GLM</strong><br>Generalized Linear Models: p(y|x) is exponential family with conditional mean $ \mu_i= f_\i(\theta^{T}x)$.</p>
+<h3 id="Parameter_learning_in_gm">Parameter learning in gm</h3><p><strong>NO Latent variable</strong><br>Given training data, 我们对其进行建模，<strong>SUPPOESE</strong>这组数据服从某种模型（Gaussian,Multinomial…）<br>比如线性回归，我们可以认为$p\left(y|x\right) = gaussian\left(y|\theta^{T}x,\gamma^{2} \right)$<br>利用maxmum log likehood对参数进行求解。得到的参数$\theta$与loss function得到的一致。<br><strong>关于sufficient statistics的几点说明</strong></p>
+<ul>
+<li>In the examples above, the sufficient statistics were merely sums (counts) of the data:<br>Bernoulli: number of heads, tails<br>Multinomial: number of each type<br>Gaussian: mean, mean-square<br>Regression: correlations</li>
+<li>this is true for all<br>exponential family models: sufficient statistics are the<br>average natural parameters.</li>
+<li>只要指数家族模型才有简单的sufficient statistics<br><strong>Generative v.s Descriminative model</strong></li>
+<li>Generative Model: 直接对$p\left(x,y\right)$进行建模，在预测时用bayes rule来推断条件概率$p\left(y|x\right)$。通过G-M可以做密度估计(density estimation)</li>
+<li>Discriminative Model:直接对$p\left(y|x\right)进行建模。目标驱动化，如做regression。</li>
+</ul>
+<p><strong>Generative model for classification</strong></p>
+<ul>
+<li>$p\left(x,y\right) = p\left(y\right)p\left(x|y\right)$这里$p\left(y\right)$时某类的prior information。$p\left(x|y\right)$是某一类的条件特征分布。</li>
+<li>prior: Bernoulli or Multimomial。</li>
+<li>class-conditional distribution:如果数据是continuous，一般使用Gaussian class-conditional.$p\left(x|y=k,\theta\right) = \frac{1}{|2\pi \sum|^{\frac{1}{2}}|}exp{-frac{1}{2} \left(x-\mu_k \sum^{-1} \left(x-\mu_k \right)\right)}$（Gaussion discriminative model，在Andrew Ng的stanford课上有详细推导）</li>
+<li>Using MLE，The maximum likelihood fit of a Gaussian to some data is the Gaussian whose mean is equal to the data mean and whose covariance is equal to the sample covariance.</li>
+<li>如果data比较少，或者＃ of data &lt;&lt; dim of data，有一些以下下Regularizations：</li>
+<li><ol>
+<li>Assuming all covariance are the same!==&gt; fish discriminant analysis</li>
+</ol>
+</li>
+<li><ol>
+<li>Assuming the covariance matrix is diagnal…(boundary是linear的)</li>
+</ol>
+</li>
+<li><ol>
+<li>add a bit of the identity matrix to each sample covariance. This “fattens it up” in directions where there wasn’t enough data. Equivalent to using a “Wishart prior” on the covariance matrix.(这一块不是很理解)</li>
+</ol>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/07/Graphical-Models-Notes/" data-id="ci86lkcea000iwsts0etmytix" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/07/Graphical-Models-Notes/" data-id="ci86sovwr000hc4tseb79xygb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -177,10 +215,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/06/acl-2014-tutorial-language-modeling-using-ml/" data-id="ci86lkce20002wstsq5sjtfb8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/06/acl-2014-tutorial-language-modeling-using-ml/" data-id="ci86sovwi0002c4tsh7fslvmr" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/language-modeling/">language modeling</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/machine-learning/">machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/natural-language-proccessing/">natural language proccessing</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/language-modeling/">language modeling</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/natural-language-proccessing/">natural language proccessing</a></li></ul>
 
     </footer>
   </div>
@@ -214,7 +252,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/05/PRML-reading-notes/" data-id="ci86lkce8000dwsts36n7inqg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/05/PRML-reading-notes/" data-id="ci86sovwo000dc4tsmf3hqtig" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PRML/">PRML</a></li></ul>
@@ -248,7 +286,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/05/hello-world/" data-id="ci86lkcdy0001wstsum9ie8bz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/05/hello-world/" data-id="ci86sovwe0001c4tsnt1t1248" class="article-share-link">Share</a>
       
       
     </footer>
@@ -277,7 +315,8 @@
       
         <p>下面是搜集的一些机器学习的课程资源：</p>
 <h2 id="1-_General_Machine_learning_courses">1. General Machine learning courses</h2><h3 id="1-1_Introduction_to_Machine_Learning_courses">1.1 Introduction to Machine Learning courses</h3><p>Coursera上 Andrew Ng的<a href="https://www.coursera.org/learn/machine-learning" target="_blank" rel="external">machine learning</a>课，现在是self learning，可以随时学习。</p>
-<h3 id="1-2_Machine_Learning_courses_@_Universities">1.2 Machine Learning courses @ Universities</h3><p>Andrew Ng在Stanford开设的<a href="http://cs229.stanford.edu/" target="_blank" rel="external">CS 229: Machine Learning</a>课程，notes很好，多看几遍收获很大。<br>来自Washington的Pedro Domingos在Coursera上面开设的<a href="https://www.coursera.org/course/machlearning" target="_blank" rel="external">Machine Learning</a>，Domingos大牛可谓机器学习界风云人物，发明了Sum-Product Network, Markov Logic等等模型，我等渣渣只能在大牛的脚下做一些小的improvement。</p>
+<h3 id="1-2_Machine_Learning_courses_@_Universities_with_videos">1.2 Machine Learning courses @ Universities with videos</h3><p>Andrew Ng在Stanford开设的<a href="http://cs229.stanford.edu/" target="_blank" rel="external">CS 229: Machine Learning</a>课程，notes很好，多看几遍收获很大。<br>来自Washington的Pedro Domingos在Coursera上面开设的<a href="https://www.coursera.org/course/machlearning" target="_blank" rel="external">Machine Learning</a>，Domingos大牛可谓机器学习界风云人物，发明了Sum-Product Network, Markov Logic等等模型，我等渣渣只能在大牛的脚下做一些小的improvement。<br>CMU院士Tom Mitchell开设的<a href="http://www.cs.cmu.edu/~tom/10701_sp11/" target="_blank" rel="external">10-701/15-781</a></p>
+<h3 id="1-3_Machine_Learning_courses_@_Universities_without_videos">1.3 Machine Learning courses @ Universities without videos</h3><p>MIT 6.867 研究生课程<a href="http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-867-machine-learning-fall-2006/" target="_blank" rel="external">Machine Learning</a>，notes很详细！</p>
 <h2 id="2-_Advanced_machine_learning_courses">2. Advanced machine learning courses</h2><p>高级机器学习课程，包括图模型，无参贝叶斯，统计机器学习理论</p>
 <h3 id="2-1_Probabilistic_Graphical_Models">2.1 Probabilistic Graphical Models</h3><p>来自CMU的Eric Xing在2014年春季开设的概率图模型：<a href="http://www.cs.cmu.edu/~epxing/Class/10708-14/lecture.html" target="_blank" rel="external">Probabilistic Graphical Models<br>(Spring 2014)</a></p>
 <p>Stanford的Daphne Koller在coursera开设的<a href="https://www.coursera.org/course/pgm" target="_blank" rel="external">Probabilistic Graphical Models</a></p>
@@ -286,10 +325,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/05/Resources-of-machine-learning/" data-id="ci86lkce60009wstsy1ah2ctu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/05/Resources-of-machine-learning/" data-id="ci86sovwm0009c4ts476qqhok" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/learning/">learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/machine-learning/">machine learning</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/learning/">learning</a></li></ul>
 
     </footer>
   </div>

@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Graphical_Models_Notes | SunShining</title>
+  <title>Graphical-Models-Notes | SunShining</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Grapical ModelProbalistic graphical modelNO FREE LUNCH theory: You must make assumptions before you learn anything!! If you do not make assumptions, you only can make predictions that appears in train">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Graphical_Models_Notes">
+<meta property="og:title" content="Graphical-Models-Notes">
 <meta property="og:url" content="http://yoursite.com/2015/04/07/Graphical-Models-Notes/index.html">
 <meta property="og:site_name" content="SunShining">
 <meta property="og:description" content="Grapical ModelProbalistic graphical modelNO FREE LUNCH theory: You must make assumptions before you learn anything!! If you do not make assumptions, you only can make predictions that appears in train">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Graphical_Models_Notes">
+<meta name="twitter:title" content="Graphical-Models-Notes">
 <meta name="twitter:description" content="Grapical ModelProbalistic graphical modelNO FREE LUNCH theory: You must make assumptions before you learn anything!! If you do not make assumptions, you only can make predictions that appears in train">
   
     <link rel="alternative" href="/atom.xml" title="SunShining" type="application/atom+xml">
@@ -59,13 +59,13 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Graphical_Models_Notes
+      Graphical-Models-Notes
     </h1>
   
 
       </header>
     
-    <time class="article-date" datetime="2015-04-06T18:23:26.000Z" itemprop="datePublished">04-07-2015</time>
+    <time class="article-date" datetime="2015-04-07T04:15:38.000Z" itemprop="datePublished">04-07-2015</time>
     
   </div>
   <div class="article-inner">
@@ -94,6 +94,14 @@
 <td>0</td>
 </tr>
 <tr>
+<td>011</td>
+<td>0</td>
+</tr>
+<tr>
+<td>100</td>
+<td>1</td>
+</tr>
+<tr>
 <td>111</td>
 <td>?</td>
 </tr>
@@ -115,11 +123,41 @@
 <li>Function $A\left(x\right) = \log Z\left(\eta \right)$is the log normalizer</li>
 <li>Examples: Bernoulli, binomial/geometric/negative-binomial, Poisson, gamma, multinomial, Gaussian, …</li>
 </ul>
+<p><strong>Moments</strong><br>We can easily compute moments of any exponential family<br>distribution by taking the derivatives of the log normalizer $A\left(\eta \right)$.<br>The $q^{th}$ derivative gives the $q^{th}$ centred moment.<br>$$\frac{dA\left(\eta \right)}{d \eta} = mean$$<br>$$\frac{d^{2}A\left(\eta \right)}{d^{2} \eta} = variance$$<br>当sufficient statistic是vector时，需要求偏导，而不是导数了。</p>
+<p><strong>GLM</strong><br>Generalized Linear Models: p(y|x) is exponential family with conditional mean $ \mu_i= f_\i(\theta^{T}x)$.</p>
+<h3 id="Parameter_learning_in_gm">Parameter learning in gm</h3><p><strong>NO Latent variable</strong><br>Given training data, 我们对其进行建模，<strong>SUPPOESE</strong>这组数据服从某种模型（Gaussian,Multinomial…）<br>比如线性回归，我们可以认为$p\left(y|x\right) = gaussian\left(y|\theta^{T}x,\gamma^{2} \right)$<br>利用maxmum log likehood对参数进行求解。得到的参数$\theta$与loss function得到的一致。<br><strong>关于sufficient statistics的几点说明</strong></p>
+<ul>
+<li>In the examples above, the sufficient statistics were merely sums (counts) of the data:<br>Bernoulli: number of heads, tails<br>Multinomial: number of each type<br>Gaussian: mean, mean-square<br>Regression: correlations</li>
+<li>this is true for all<br>exponential family models: sufficient statistics are the<br>average natural parameters.</li>
+<li>只要指数家族模型才有简单的sufficient statistics<br><strong>Generative v.s Descriminative model</strong></li>
+<li>Generative Model: 直接对$p\left(x,y\right)$进行建模，在预测时用bayes rule来推断条件概率$p\left(y|x\right)$。通过G-M可以做密度估计(density estimation)</li>
+<li>Discriminative Model:直接对$p\left(y|x\right)进行建模。目标驱动化，如做regression。</li>
+</ul>
+<p><strong>Generative model for classification</strong></p>
+<ul>
+<li>$p\left(x,y\right) = p\left(y\right)p\left(x|y\right)$这里$p\left(y\right)$时某类的prior information。$p\left(x|y\right)$是某一类的条件特征分布。</li>
+<li>prior: Bernoulli or Multimomial。</li>
+<li>class-conditional distribution:如果数据是continuous，一般使用Gaussian class-conditional.$p\left(x|y=k,\theta\right) = \frac{1}{|2\pi \sum|^{\frac{1}{2}}|}exp{-frac{1}{2} \left(x-\mu_k \sum^{-1} \left(x-\mu_k \right)\right)}$（Gaussion discriminative model，在Andrew Ng的stanford课上有详细推导）</li>
+<li>Using MLE，The maximum likelihood fit of a Gaussian to some data is the Gaussian whose mean is equal to the data mean and whose covariance is equal to the sample covariance.</li>
+<li>如果data比较少，或者＃ of data &lt;&lt; dim of data，有一些以下下Regularizations：</li>
+<li><ol>
+<li>Assuming all covariance are the same!==&gt; fish discriminant analysis</li>
+</ol>
+</li>
+<li><ol>
+<li>Assuming the covariance matrix is diagnal…(boundary是linear的)</li>
+</ol>
+</li>
+<li><ol>
+<li>add a bit of the identity matrix to each sample covariance. This “fattens it up” in directions where there wasn’t enough data. Equivalent to using a “Wishart prior” on the covariance matrix.(这一块不是很理解)</li>
+</ol>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/07/Graphical-Models-Notes/" data-id="ci86lkcea000iwsts0etmytix" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/07/Graphical-Models-Notes/" data-id="ci86sovwr000hc4tseb79xygb" class="article-share-link">Share</a>
       
       
     </footer>
