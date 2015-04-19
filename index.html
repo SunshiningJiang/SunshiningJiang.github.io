@@ -71,7 +71,7 @@
   <div class="article-inner">
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Grapical_Model">Grapical Model</h2><h3 id="Probalistic_graphical_model">Probalistic graphical model</h3><p><strong>NO FREE LUNCH theory</strong>: You must make assumptions before you learn anything!! If you do not make assumptions, you only can make predictions that appears in training data.</p>
+        <h2 id="Grapical_Model">Grapical Model</h2><h3 id="Probalistic_Graphical_Model_Representation">Probalistic Graphical Model Representation</h3><p><strong>NO FREE LUNCH theory</strong>: You must make assumptions before you learn anything!! If you do not make assumptions, you only can make predictions that appears in training data.</p>
 <p><strong>Learning:</strong> Searching in hypothsis space == optimization a function.<br><strong>Machine learning good example</strong> 曲线拟合，我们的assumption是曲线时smooth的，如果给一堆数据：</p>
 <table>
 <thead>
@@ -112,10 +112,10 @@
 <p>$$Z = \sum_x \prod_{cliques~c} \psi_c\left(x_c \right)$$</p>
 <p>计算Z要花费指数的时间<br>一般情况下我们用$\log$来表示$\psi \left(x \right)$<br>$$\psi_c \left(x_c \right) = exp \left(-H_c\left(x_c \right) \right)$$<br>这里$H_c\left(x_c \right)$是能量函数。</p>
 <p>于是$P\left(x\right) = \frac{1}{Z} exp \left(-\sum_{cliques~c} H_c\left(x_c\right) \right) = \frac{1}{Z}exp\left(-H\left(X\right)\right)$</p>
-<p>$H\left(X \right)$ is called “free energy”</p>
+<p>$H\left(X \right)$ is called “free energy” function</p>
 <p><strong>Ising Models</strong></p>
-<p>Nodes are arranged in a regular topology (often a regular packing<br>grid) and connected only to their geometric neighbours.<br>Energy:<br>然后<br>$$H\left(x\right) = \sum_{ij} \beta_{ij} x_i x_j + \sum_i \alpha_i x_i$$</p>
-<p><strong>Relations beteen directed graph&amp; undirected graph</strong><br>两者不能相互转化。</p>
+<p>Nodes are arranged in a regular topology (often a regular packing grid) and connected only to their geometric neighbours.<br>Energy function:<br>$$H\left(x\right) = \sum_{ij} \beta_{ij} x_i x_j + \sum_i \alpha_i x_i$$</p>
+<p><strong>Relations beteen directed graph &amp; undirected graph</strong><br>两者不能相互转化。</p>
 <p><strong>Exponential Family</strong><br>很多分布都可以看成指数家族的一个特例（Uniform distribution是一个例外），定义如下：<br>$$p\left(x|\eta\right) = h\left(x\right)exp \left(\eta^{T}T\left(x\right) - A\left(\eta \right)\right)$$<br>$$p\left(x|\eta\right) = \frac{1}{Z\left(\eta \right)}h\left(x\right)exp\left(\eta^{T} T\left(x\right) \right)$$</p>
 <ul>
 <li>Natural parameter $\eta$</li>
@@ -123,41 +123,65 @@
 <li>Function $A\left(x\right) = \log Z\left(\eta \right)$is the log normalizer</li>
 <li>Examples: Bernoulli, binomial/geometric/negative-binomial, Poisson, gamma, multinomial, Gaussian, …</li>
 </ul>
-<p><strong>Moments</strong><br>We can easily compute moments of any exponential family<br>distribution by taking the derivatives of the log normalizer $A\left(\eta \right)$.<br>The $q^{th}$ derivative gives the $q^{th}$ centred moment.<br>$$\frac{dA\left(\eta \right)}{d \eta} = mean$$<br>$$\frac{d^{2}A\left(\eta \right)}{d^{2} \eta} = variance$$<br>当sufficient statistic是vector时，需要求偏导，而不是导数了。</p>
+<p><strong>Moments</strong><br>We can easily compute moments of any exponential family distribution by taking the derivatives of the log normalizer $A\left(\eta \right)$.<br>The $q^{th}$ derivative gives the $q^{th}$ centred moment.<br>$$\frac{dA\left(\eta \right)}{d \eta} = mean$$<br>$$\frac{d^{2}A\left(\eta \right)}{d^{2} \eta} = variance$$<br>当sufficient statistic是vector时，需要求偏导，而不是导数了。</p>
 <p><strong>GLM</strong><br>Generalized Linear Models: p(y|x) is exponential family with conditional mean $ \mu_i= f_\i(\theta^{T}x)$.</p>
-<h3 id="Parameter_learning_in_gm">Parameter learning in gm</h3><p><strong>NO Latent variable</strong><br>Given training data, 我们对其进行建模，<strong>SUPPOESE</strong>这组数据服从某种模型（Gaussian,Multinomial…）<br>比如线性回归，我们可以认为$p\left(y|x\right) = gaussian\left(y|\theta^{T}x,\gamma^{2} \right)$<br>利用maxmum log likehood对参数进行求解。得到的参数$\theta$与loss function得到的一致。<br><strong>关于sufficient statistics的几点说明</strong></p>
+<h3 id="Parameter_Learning_in_Graphical_Models">Parameter Learning in Graphical Models</h3><p><strong>NO Latent variable</strong><br>Given training data, 我们对其进行建模，<strong>SUPPOESE</strong>这组数据服从某种模型（Gaussian,Multinomial…）<br>比如线性回归，我们可以认为$p\left(y|x\right) = gaussian\left(y|\theta^{T}x,\sigma^{2} \right)$<br>利用maxmum log likehood对参数进行求解。得到的参数$\theta$与loss function得到的一致。<br><strong>关于sufficient statistics的几点说明</strong></p>
 <ul>
-<li>In the examples above, the sufficient statistics were merely sums (counts) of the data:<br>Bernoulli: number of heads, tails<br>Multinomial: number of each type<br>Gaussian: mean, mean-square<br>Regression: correlations</li>
-<li>this is true for all<br>exponential family models: sufficient statistics are the<br>average natural parameters.</li>
+<li>In the examples above, the sufficient statistics were merely sums (counts) of the data:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Distribution</th>
+<th>Sufficient Statistics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bernoulli:</td>
+<td>number of heads, tails</td>
+</tr>
+<tr>
+<td>Multinomial:</td>
+<td>number of each type</td>
+</tr>
+<tr>
+<td>Gaussian:</td>
+<td>mean, mean-square</td>
+</tr>
+<tr>
+<td>Regression:</td>
+<td>correlations</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>this is true for all exponential family models: sufficient statistics are the average natural parameters.</li>
 <li>只要指数家族模型才有简单的sufficient statistics<br><strong>Generative v.s Descriminative model</strong></li>
 <li>Generative Model: 直接对$p\left(x,y\right)$进行建模，在预测时用bayes rule来推断条件概率$p\left(y|x\right)$。通过G-M可以做密度估计(density estimation)</li>
-<li>Discriminative Model:直接对$p\left(y|x\right)进行建模。目标驱动化，如做regression。</li>
+<li>Discriminative Model:直接对$p\left(y|x\right)$进行建模。目标驱动化，如做regression。</li>
 </ul>
 <p><strong>Generative model for classification</strong></p>
 <ul>
 <li>$p\left(x,y\right) = p\left(y\right)p\left(x|y\right)$这里$p\left(y\right)$时某类的prior information。$p\left(x|y\right)$是某一类的条件特征分布。</li>
 <li>prior: Bernoulli or Multimomial。</li>
-<li>class-conditional distribution:如果数据是continuous，一般使用Gaussian class-conditional.$p\left(x|y=k,\theta\right) = \frac{1}{|2\pi \sum|^{\frac{1}{2}}|}exp{-frac{1}{2} \left(x-\mu_k \sum^{-1} \left(x-\mu_k \right)\right)}$（Gaussion discriminative model，在Andrew Ng的stanford课上有详细推导）</li>
+<li>class-conditional distribution:如果数据是continuous，一般使用Gaussian class-conditional.$p\left(x|y=k,\theta\right) = \frac{1}{|2\pi \sum^{\frac{1}{2}}|}exp(-\frac{1}{2} \left(\left(x-\mu_k\right) \sum^{-1} \left(x-\mu_k \right)\right))$（Gaussion discriminative model，在Andrew Ng的stanford课上有详细推导）</li>
 <li>Using MLE，The maximum likelihood fit of a Gaussian to some data is the Gaussian whose mean is equal to the data mean and whose covariance is equal to the sample covariance.</li>
-<li>如果data比较少，或者＃ of data &lt;&lt; dim of data，有一些以下下Regularizations：</li>
-<li><ol>
+<li>如果data比较少，或者＃ of data &lt;&lt; dim of feature ，有一些以下Regularizations：</li>
+</ul>
+<ol>
 <li>Assuming all covariance are the same!==&gt; fish discriminant analysis</li>
-</ol>
-</li>
-<li><ol>
 <li>Assuming the covariance matrix is diagnal…(boundary是linear的)</li>
-</ol>
-</li>
-<li><ol>
 <li>add a bit of the identity matrix to each sample covariance. This “fattens it up” in directions where there wasn’t enough data. Equivalent to using a “Wishart prior” on the covariance matrix.(这一块不是很理解)</li>
 </ol>
-</li>
+<ul>
+<li>既然已经有了$p\left(x|y,\theta\right)$，我们的目标是$p\left(y|x,\theta\right)$，通过bayes rule：<br>$$p\left(y=k|x,\theta\right) = \frac{e^{\beta_k^{T}x}}{\sum_je^{\beta_j^{T}x}}$$<br>此时$\beta_k = \mu_k^{T}\sum^{-1}x-\mu_k^{T}\sum_{-1}\mu_k /2+\log \pi_k$</li>
 </ul>
-
+<h3 id="Latent_Variable_Learning_in_Graphical_Models(Using_EM_algorithm)">Latent Variable Learning in Graphical Models(Using EM algorithm)</h3><h3 id="Inference_in_Graphical_Model">Inference in Graphical Model</h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/07/Graphical-Models-Notes/" data-id="ci86sovwr000hc4tseb79xygb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/07/Graphical-Models-Notes/" data-id="ci873imrp000h3wtsbd39zc0i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -215,7 +239,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/06/acl-2014-tutorial-language-modeling-using-ml/" data-id="ci86sovwi0002c4tsh7fslvmr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/06/acl-2014-tutorial-language-modeling-using-ml/" data-id="ci873imrf00023wtsevutb9sj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/language-modeling/">language modeling</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/natural-language-proccessing/">natural language proccessing</a></li></ul>
@@ -252,7 +276,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/05/PRML-reading-notes/" data-id="ci86sovwo000dc4tsmf3hqtig" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/05/PRML-reading-notes/" data-id="ci873imrm000d3wtso6li4fb0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PRML/">PRML</a></li></ul>
@@ -286,7 +310,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/05/hello-world/" data-id="ci86sovwe0001c4tsnt1t1248" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/05/hello-world/" data-id="ci873imrb00013wtsd7hs2zrp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -325,7 +349,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/05/Resources-of-machine-learning/" data-id="ci86sovwm0009c4ts476qqhok" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/05/Resources-of-machine-learning/" data-id="ci873imrj00093wtsgx1e0a6s" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/learning/">learning</a></li></ul>
