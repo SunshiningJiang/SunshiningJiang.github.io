@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>An Introduction to EM Algorithm | SunShining</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在图模型中，如果我们所有的变量全都是observed的话，就可以用maxmum likelihood estimation来求解参数，但是现实世界是纷繁复杂的，很多时候我们并不能观测到所有的变量。就像上帝已一个无形的手把某一些变量的分布给隐藏了。而在上个世纪的统计牛人就提出了类似于EM算法来对隐变量进行估计和求解。
+K-Means Algorithm比如，在一个分类问题中，通过有lable的训练数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="An Introduction to EM Algorithm">
+<meta property="og:url" content="http://yoursite.com/2015/04/09/An-Introduction-to-EM-Algorithm/index.html">
+<meta property="og:site_name" content="SunShining">
+<meta property="og:description" content="在图模型中，如果我们所有的变量全都是observed的话，就可以用maxmum likelihood estimation来求解参数，但是现实世界是纷繁复杂的，很多时候我们并不能观测到所有的变量。就像上帝已一个无形的手把某一些变量的分布给隐藏了。而在上个世纪的统计牛人就提出了类似于EM算法来对隐变量进行估计和求解。
+K-Means Algorithm比如，在一个分类问题中，通过有lable的训练数">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="An Introduction to EM Algorithm">
+<meta name="twitter:description" content="在图模型中，如果我们所有的变量全都是observed的话，就可以用maxmum likelihood estimation来求解参数，但是现实世界是纷繁复杂的，很多时候我们并不能观测到所有的变量。就像上帝已一个无形的手把某一些变量的分布给隐藏了。而在上个世纪的统计牛人就提出了类似于EM算法来对隐变量进行估计和求解。
+K-Means Algorithm比如，在一个分类问题中，通过有lable的训练数">
+  
+    <link rel="alternative" href="/atom.xml" title="SunShining" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">SunShining</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-home-icon" class="nav-icon" href="/"></a>
+        
+          <a id="nav-archives-icon" class="nav-icon" href="/archives"></a>
+        
+          <a id="nav-about-icon" class="nav-icon" href="/about"></a>
+        
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-An-Introduction-to-EM-Algorithm" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      An Introduction to EM Algorithm
+    </h1>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2015-04-09T14:52:54.000Z" itemprop="datePublished">04-09-2015</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在图模型中，如果我们所有的变量全都是observed的话，就可以用maxmum likelihood estimation来求解参数，但是现实世界是纷繁复杂的，很多时候我们并不能观测到所有的变量。就像上帝已一个无形的手把某一些变量的分布给隐藏了。而在上个世纪的统计牛人就提出了类似于EM算法来对隐变量进行估计和求解。</p>
+<h1 id="K-Means_Algorithm">K-Means Algorithm</h1><p>比如，在一个分类问题中，通过有lable的训练数据，我们可以学习到一个决策边界，如果我们把训练数据的lable去掉，这时候我们还能够对未来的数据进行预测他们所属的lable吗？这就是聚类问题，一般我们可以使用K-Means算法，K-Means算法的idea是我们对训练数据所属的lable进行迭代，最初我们随机初始化一个中心，然后在每一次迭代中我们对训练数据Assign一个距离它最近的那个中心的lable作为它的lable。因此K-Means算法就如下所示：</p>
+<blockquote>
+<ul>
+<li>Initialize <em>*clusering centroids</em>$\mu_1,\mu_2,…,\mu_k \in R^{n}$</li>
+<li>Repeat until convergence{<br>  For every $i$, set $$c^{i} := argmin_{j} ||x^{\left(i\right)}-\mu<em>j||^{2}$$<br>  For eachj,set $$\mu_j := \frac{\sum\</em>{i=1}^{m}1{c^{\left(i\right)} = j}x^{\left(i\right)}}{\sum_{i=1}^{m}1{c^{\left(i\right)} = j}}}$$<br>}<br>在迭代收敛后，K-Means收敛到局部最小值。这里K-Means类似于Hard EM，因为其在每次迭代时直接为每个data赋一个lable。而不是已概率的形式进行赋值。下面我们就介绍EM算法在聚类中的一个例子，也就是<strong>高斯混合分布</strong>(Mixture of Gaussian)</li>
+</ul>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/04/09/An-Introduction-to-EM-Algorithm/" data-id="ci8oifzyv000n3ktsgazvgcat" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/EM-algorithm/">EM algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unsupervised-learning/">Unsupervised learning</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/04/12/Math-Resourses/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Math Resourses
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/04/07/Graphical-Models-Notes/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Graphical-Models-Notes</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Yong Jiang<br>
+      <a href="https://github.com/steven5538/hexo-theme-athena" target="_blank">Athena</a> by <a href="http://steven5538.tw" target="_blank">Steven5538</a> | Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+<script type="text/x-mathjax-config"> 
+MathJax.Hub.Config({ 
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} 
+}); 
+</script>
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </div>
+</body>
+</html>

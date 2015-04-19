@@ -177,11 +177,12 @@
 <ul>
 <li>既然已经有了$p\left(x|y,\theta\right)$，我们的目标是$p\left(y|x,\theta\right)$，通过bayes rule：<br>$$p\left(y=k|x,\theta\right) = \frac{e^{\beta_k^{T}x}}{\sum_je^{\beta_j^{T}x}}$$<br>此时$\beta_k = \mu_k^{T}\sum^{-1}x-\mu_k^{T}\sum_{-1}\mu_k /2+\log \pi_k$</li>
 </ul>
+<p><strong>Structure learning in bayesian network of tree structure</strong><br>原则上我们要search所有的组合，然后选择likelihood最大的那一个。但是，这个问题可以转换到一个传统的数据结构的问题，我们可以使用最大生成树！<br>既然可以使用最大生成树，我们就要来推导一下这里的edge的weight。likelihood function为:<br>$$l\left(\theta;D \right) = \sum_{x \in V_all}N\left(x\right)\log p\left(x\right) = \sum_x N\left(x\right)\left(\log \left(x_r\right)+\sum_{i\neq r}\log p\left(x_i|\pi_i\right)\right)$$</p>
 <h3 id="Latent_Variable_Learning_in_Graphical_Models(Using_EM_algorithm)">Latent Variable Learning in Graphical Models(Using EM algorithm)</h3><h3 id="Inference_in_Graphical_Model">Inference in Graphical Model</h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/07/Graphical-Models-Notes/" data-id="ci873imrp000h3wtsbd39zc0i" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/07/Graphical-Models-Notes/" data-id="ci8oifzyt000m3kts4dz4g7h0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -189,6 +190,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2015/04/09/An-Introduction-to-EM-Algorithm/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          An Introduction to EM Algorithm
+        
+      </div>
+    </a>
   
   
     <a href="/2015/04/06/acl-2014-tutorial-language-modeling-using-ml/" id="article-nav-older" class="article-nav-link-wrap">
