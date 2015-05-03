@@ -54,6 +54,50 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-From-Linear-Model-to-Generalized-Linear-Model-Part 1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+      <header class="article-header">
+        
+  
+    <a class="article-title" href="/2015/05/03/From-Linear-Model-to-Generalized-Linear-Model-Part 1/">From Linear Model to Generalized Linear Model-Part 1</a>
+  
+
+      </header>
+    
+    <time class="article-date" datetime="2015-05-03T09:14:48.000Z" itemprop="datePublished">05-03-2015</time>
+    
+  </div>
+  <div class="article-inner">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前一阵在一个机器学习的qq群里听了一位妹子做关于线性模型的tutorial，我就按着自己的理解把线性模型的资料窜一下。</p>
+<h1 id="1_引入">1 引入</h1><p>我们知道，在机器学习模型中最基础的就是线性模型，无论是有计算机科学味道的机器学习书籍（如<a href="http://research.microsoft.com/en-us/um/people/cmbishop/prml/" target="_blank" rel="external">PRML</a>）还是统计系味道较重的统计学习书籍（如<a href="http://statweb.stanford.edu/~tibs/ElemStatLearn/" target="_blank" rel="external">ESL</a>）,或者是各位大神（Andrew Ng, Eric Xing…）的机器学习课程都是先从线性模型还是讲起，可见其基础性。本文先从基本的线性模型，到指数家族，最后谈广义线性模型，以及众多广义线性模型的例子。</p>
+<h1 id="2_用于回归问题的线性模型">2 用于回归问题的线性模型</h1><h2 id="2-1_模型定义">2.1 模型定义</h2><p>有监督学习是指通过训练数据学到一个model使得其在测试数据上面能够表现的很好。而回归问题中我们想学到的模型就是一个超平面，我们希望这个超平面能够很好地来fit我们的训练数据。假设我们的输入的一个数据是$x$，这里的$x$是一个向量，每一维度代表这个数据的一个属性即$x_i \in R$，而且$x\in R$，输出是$y$，一个很直观的想法就是我希望$y$与$x$是一个近似的线性关系。因此，我们定义一个近似$y$的线性函数：<br>$$h_\theta \left(x\right) = \sum_{i=0}^{n} \theta_i x_i = \theta^Tx$$<br>其中，$\theta_i$是参数，可以理解成对每一个 $x_i \in R$ 的一个权重，定义了这个模型，我们接下来希望通过$x$和$y$来获得这些参数。因此，我们定义了一个损失函数 $J\left(\theta \right)$，我们希望平均下来对于每一个$x$输出的$y$及其预测的$h\left(x\right)$之间的平均误差最小。<br>$$J\left(\theta \right) = \frac{1}{2} \sum_{i=1}^{m}\left(h_\theta\left(x^{(i)}\right)-y^{(i)}\right)$$<br>在这个式子中$x^{(i)}$和$y^{(i)}$分别代表第$i$个数据的输入和输出。我们可以看出，其实这个函数就是中学学到的最小二乘模型。既然目标函数出来了，我们就需要用一些优化方面的技术来求解我们的参数。</p>
+<h2 id="2-2_求解模型">2.2 求解模型</h2><h3 id="2-2-1_直接求解">2.2.1 直接求解</h3><p>我们可以看出，我们的目标函数是个凸函数，我们把目标函数写成向量的形式，如下：<br>$$J\left(\theta \right) = \frac{1}{2}\left(X\theta - y\right)^T\left(X\theta - y\right)$$<br>这里我们定义$X = $<br>\begin{bmatrix}<br>—(x^{(1)})^T— \\<br>—(x^{(2)})^T— \\<br>:                 \\<br>:               \\<br>—(x^{(m)})^T—<br>\end{bmatrix}<br>m是指训练数据的数量。每一个$x^{(i)}分别指一个数据$<br>\begin{aligned}\end{aligned}<br>$$\bigtriangledown_{\theta} J\left(\theta\right) = X^T\left(X\theta - y\right)$$<br>设偏导数为0，则<br>$$\theta = \left(X^TX\right)^{-1}X^Ty$$<br>这么轻松就得到了$\theta$的值了，得到$\theta$后，我们看一下对于一个数据$\^{x}$，我们可以通过下面这个式子得到对于的$\^{y}$。<br>$$\^{y} = X \theta = X\left(X^TX\right)^{-1}X^Ty$$<br>我们可以看到，$y$与$\^{y}$直接是通过一个矩阵来进行映射，我们把矩阵$H=X\left(X^TX\right)^{-1}X^T$这个矩阵称为帽子矩阵（hat matrix）。这里我们停下来分析一下这个式子的几何意义，<br>在一个m维的空间里，$y$就是一个点，所有的$x^{(i)}$ span 出一个平面。我们的目标就是在这个平面上面搜寻出一个点，使得$y$到这个点的距离最小，因此，最好的点就是$y$到平面的最短距离。这里我们得到的$y_{target}$是对$y$的无偏估计。</p>
+<p>life is really easy？我们仔细观察，这里存在两个问题：</p>
+<p>（1）在我们得到最后关于$\theta$的表达式中有一项矩阵求逆，所以，当$X^TX$不能求逆(奇异矩阵)时，即使咱们能得到$\theta$的表达式，也是白搭嘛。有哪些情况呢？如：$x_i$和$x_j$之间有线性关系。这时候怎么办呢，我们需要对$\theta$加一些约束条件。后面有说$LASSO$或者$Ridge$  $Regression$。<br>（2）即使用了预处理（特征选择等）什么天马行空的方法，这个矩阵能求逆，当每一个$x^{(i)}$的维数很高时，我们发现，即使简单地求一下$X^TX$都很耗时。看来，我们需要找到更快的解决方法，这就是接下来要说基于梯度的方法。</p>
+<h3 id="2-2-2_基于梯度的方法">2.2.2 基于梯度的方法</h3><p>基于梯度的方法基本思想是，既然我不能一次性找到最优的solution，那我慢慢找，通过一个学习法则来找，每一步都满足使得目标函数有一定的提高。这样我们的第一个方法就是梯度下降法，初始化一组参数$\theta$，对于一个训练数据，我们通过如下迭代$\theta$:<br>$$\theta_j:=\theta_j - \alpha \frac{\partial}{\partial \theta_j}J\left(\theta\right)$$<br>通过求导可以得到<br>$$\theta_j:=\theta_j + \alpha \left(y^{(i)}-h_\theta\left(x^{(i)}\right)\right)x_j^{(i)}$$<br>由于我们训练样本有$m$个数据，我们迭代的公式即为：<br>$$\theta_j:=\theta_j + \alpha \sum_{i=1}^{m} \left(y^{(i)}-h_\theta\left(x^{(i)}\right)\right)x_j^{(i)}$$</p>
+<p>在这个方法中，每次我们更新一次$\theta$，都要穷举所有的训练样本，因此，这类算法被称为批梯度下降（batch gradient descent）。可想而知，这种算法耗时很长，何不如每次仅考虑一个数据来对$\theta_j$进行更新呢？这就是下面的随机梯度下降（stochastic gradient descent）。</p>
+<p>循环直至收敛{<br>    对训练集每一个数据进行操作{<br>    $$\theta_j:=\theta_j + \alpha \left(y^{(i)}-h_\theta\left(x^{(i)}\right)\right)x_j^{(i)}$$<br>    }<br>}</p>
+<h2 id="2-3_结果的思考">2.3 结果的思考</h2><p>通过上面的求解，我们可以直接或者间接得到$\theta$的值，在原来当我们设计模型的时候，我们希望$y\approx h_{\theta} \left(x\right)$，实际上，他们直接有一个误差$\epsilon$，我想现在换一个角度考虑，我直接对$y$跟$x$的关系进行建模，因此，<br>$$y^{(i)} = h_{\theta} \left(x^{(i)}\right) + \epsilon^{(i)}$$<br>$\epsilon$服从一个分布函数。</p>
+<p>在这里有一个结论，<br>如果$\epsilon^{(i)}$之间独立同分布（IID）,并且服从一个均值为0,方差为$\sigma ^{2}$的高斯分布。<br>$$p\left(\epsilon^{(i)} \right) = \frac{1}{\sqrt{2\pi}\sigma}exp\left(-\frac{\left(\epsilon^{(i)}\right)^{2}}{2 \sigma ^{2}}\right)$$<br>将$\epsilon^{(i)}$代入，我们可以得到，<br>$$p\left(y^{(i)}|x^{(i)};\theta \right) = \frac{1}{\sqrt{2\pi}\sigma}exp\left(-\frac{\left(y^{(i)} - h_{\theta} \left(x^{(i)}\right)\right)^{2}}{2 \sigma ^{2}}\right)$$<br>因为训练数据中样本之间关系是IID的，我们可以最大化似然估计（MLE），似然函数为：<br>\begin{aligned}<br>L\left(\theta \right) = L\left(\theta;X,\vec{y} \right) = p\left(\vec{y} | X;\theta \right)<br>= \prod_{i=1}^{m}  \frac{1}{\sqrt{2\pi}\sigma}exp\left(-\frac{\left(y^{(i)} - h_{\theta} \left(x^{(i)}\right)\right)^{2}}{2 \sigma ^{2}}\right)\\<br>\end{aligned}<br>我们想最大化似然函数，这样就意味着最大化$exp$括号里的式子。可以观测到，里面的式子其实就正比于我们之前的损失函数。而这里，我们最后选取的参数$\theta$跟$\sigma$之间没有关系。这个现象比较有趣，我们将在以后讨论广义线性模型时讨论到它。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/05/03/From-Linear-Model-to-Generalized-Linear-Model-Part 1/" data-id="ci98jke2u0000jgts1umxmtp7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/General-Linear-Model/">General Linear Model</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linear-Model/">Linear Model</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Some-Machine-Learning-Blogs" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -71,12 +115,12 @@
   <div class="article-inner">
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a href="http://quantombone.blogspot.com/" target="_blank" rel="external">Blog by Tomasz Malisiewicz</a>(Phd@CMU Now PostDoc@MIT)<br><a href="https://saravananthirumuruganathan.wordpress.com/category/data-mining/" target="_blank" rel="external">Blog by  Saravanan Thirumuruganathan</a></p>
+        <p><a href="http://quantombone.blogspot.com/" target="_blank" rel="external">Blog by Tomasz Malisiewicz</a>(Phd@CMU Now PostDoc@MIT)<br><a href="https://saravananthirumuruganathan.wordpress.com/category/data-mining/" target="_blank" rel="external">Blog by  Saravanan Thirumuruganathan</a><br><a href="https://onionesquereality.wordpress.com/" target="_blank" rel="external">Blog by Shubhendu Trivedi</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/19/Some-Machine-Learning-Blogs/" data-id="ci8oifzyh00093kts5dyfl3ba" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/19/Some-Machine-Learning-Blogs/" data-id="ci98bd64a0005akts1cxx008i" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/">blog</a></li></ul>
@@ -110,248 +154,9 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/12/Math-Resourses/" data-id="ci8oifzyr000l3ktsy8cjqi2e" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/12/Math-Resourses/" data-id="ci98bd64j000iakts9i2s4ncz" class="article-share-link">Share</a>
       
       
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-An-Introduction-to-EM-Algorithm" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-      <header class="article-header">
-        
-  
-    <a class="article-title" href="/2015/04/09/An-Introduction-to-EM-Algorithm/">An Introduction to EM Algorithm</a>
-  
-
-      </header>
-    
-    <time class="article-date" datetime="2015-04-09T14:52:54.000Z" itemprop="datePublished">04-09-2015</time>
-    
-  </div>
-  <div class="article-inner">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在图模型中，如果我们所有的变量全都是observed的话，就可以用maxmum likelihood estimation来求解参数，但是现实世界是纷繁复杂的，很多时候我们并不能观测到所有的变量。就像上帝已一个无形的手把某一些变量的分布给隐藏了。而在上个世纪的统计牛人就提出了类似于EM算法来对隐变量进行估计和求解。</p>
-<h1 id="K-Means_Algorithm">K-Means Algorithm</h1><p>比如，在一个分类问题中，通过有lable的训练数据，我们可以学习到一个决策边界，如果我们把训练数据的lable去掉，这时候我们还能够对未来的数据进行预测他们所属的lable吗？这就是聚类问题，一般我们可以使用K-Means算法，K-Means算法的idea是我们对训练数据所属的lable进行迭代，最初我们随机初始化一个中心，然后在每一次迭代中我们对训练数据Assign一个距离它最近的那个中心的lable作为它的lable。因此K-Means算法就如下所示：</p>
-<blockquote>
-<ul>
-<li>Initialize <em>*clusering centroids</em>$\mu_1,\mu_2,…,\mu_k \in R^{n}$</li>
-<li>Repeat until convergence{<br>  For every $i$, set $$c^{i} := argmin_{j} ||x^{\left(i\right)}-\mu<em>j||^{2}$$<br>  For eachj,set $$\mu_j := \frac{\sum\</em>{i=1}^{m}1{c^{\left(i\right)} = j}x^{\left(i\right)}}{\sum_{i=1}^{m}1{c^{\left(i\right)} = j}}}$$<br>}<br>在迭代收敛后，K-Means收敛到局部最小值。这里K-Means类似于Hard EM，因为其在每次迭代时直接为每个data赋一个lable。而不是已概率的形式进行赋值。下面我们就介绍EM算法在聚类中的一个例子，也就是<strong>高斯混合分布</strong>(Mixture of Gaussian)</li>
-</ul>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/09/An-Introduction-to-EM-Algorithm/" data-id="ci8oifzyv000n3ktsgazvgcat" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/EM-algorithm/">EM algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unsupervised-learning/">Unsupervised learning</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Graphical-Models-Notes" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-      <header class="article-header">
-        
-  
-    <a class="article-title" href="/2015/04/07/Graphical-Models-Notes/">Graphical-Models-Notes</a>
-  
-
-      </header>
-    
-    <time class="article-date" datetime="2015-04-07T04:15:38.000Z" itemprop="datePublished">04-07-2015</time>
-    
-  </div>
-  <div class="article-inner">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Grapical_Model">Grapical Model</h2><h3 id="Probalistic_Graphical_Model_Representation">Probalistic Graphical Model Representation</h3><p><strong>NO FREE LUNCH theory</strong>: You must make assumptions before you learn anything!! If you do not make assumptions, you only can make predictions that appears in training data.</p>
-<p><strong>Learning:</strong> Searching in hypothsis space == optimization a function.<br><strong>Machine learning good example</strong> 曲线拟合，我们的assumption是曲线时smooth的，如果给一堆数据：</p>
-<table>
-<thead>
-<tr>
-<th>Data</th>
-<th>Lable</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>000</td>
-<td>1</td>
-</tr>
-<tr>
-<td>001</td>
-<td>0</td>
-</tr>
-<tr>
-<td>010</td>
-<td>0</td>
-</tr>
-<tr>
-<td>011</td>
-<td>0</td>
-</tr>
-<tr>
-<td>100</td>
-<td>1</td>
-</tr>
-<tr>
-<td>111</td>
-<td>?</td>
-</tr>
-</tbody>
-</table>
-<p>预测111的lable，这里如果我们不做什么假设的话是不可以得到lable的。</p>
-<p><strong>Markov Random Field:</strong><br>$$P\left(X\right) = \frac{1}{Z}\prod_{cliques~c} \psi_c\left(x_c \right)$$</p>
-<p>$$Z = \sum_x \prod_{cliques~c} \psi_c\left(x_c \right)$$</p>
-<p>计算Z要花费指数的时间<br>一般情况下我们用$\log$来表示$\psi \left(x \right)$<br>$$\psi_c \left(x_c \right) = exp \left(-H_c\left(x_c \right) \right)$$<br>这里$H_c\left(x_c \right)$是能量函数。</p>
-<p>于是$P\left(x\right) = \frac{1}{Z} exp \left(-\sum_{cliques~c} H_c\left(x_c\right) \right) = \frac{1}{Z}exp\left(-H\left(X\right)\right)$</p>
-<p>$H\left(X \right)$ is called “free energy” function</p>
-<p><strong>Ising Models</strong></p>
-<p>Nodes are arranged in a regular topology (often a regular packing grid) and connected only to their geometric neighbours.<br>Energy function:<br>$$H\left(x\right) = \sum_{ij} \beta_{ij} x_i x_j + \sum_i \alpha_i x_i$$</p>
-<p><strong>Relations beteen directed graph &amp; undirected graph</strong><br>两者不能相互转化。</p>
-<p><strong>Exponential Family</strong><br>很多分布都可以看成指数家族的一个特例（Uniform distribution是一个例外），定义如下：<br>$$p\left(x|\eta\right) = h\left(x\right)exp \left(\eta^{T}T\left(x\right) - A\left(\eta \right)\right)$$<br>$$p\left(x|\eta\right) = \frac{1}{Z\left(\eta \right)}h\left(x\right)exp\left(\eta^{T} T\left(x\right) \right)$$</p>
-<ul>
-<li>Natural parameter $\eta$</li>
-<li>Function $T\left(x\right)$ is the sufficient statistic(Given training data, 如果知道了其sufficient statistic，这样我们就可以把原来的training数据扔掉了)</li>
-<li>Function $A\left(x\right) = \log Z\left(\eta \right)$is the log normalizer</li>
-<li>Examples: Bernoulli, binomial/geometric/negative-binomial, Poisson, gamma, multinomial, Gaussian, …</li>
-</ul>
-<p><strong>Moments</strong><br>We can easily compute moments of any exponential family distribution by taking the derivatives of the log normalizer $A\left(\eta \right)$.<br>The $q^{th}$ derivative gives the $q^{th}$ centred moment.<br>$$\frac{dA\left(\eta \right)}{d \eta} = mean$$<br>$$\frac{d^{2}A\left(\eta \right)}{d^{2} \eta} = variance$$<br>当sufficient statistic是vector时，需要求偏导，而不是导数了。</p>
-<p><strong>GLM</strong><br>Generalized Linear Models: p(y|x) is exponential family with conditional mean $ \mu_i= f_\i(\theta^{T}x)$.</p>
-<h3 id="Parameter_Learning_in_Graphical_Models">Parameter Learning in Graphical Models</h3><p><strong>NO Latent variable</strong><br>Given training data, 我们对其进行建模，<strong>SUPPOESE</strong>这组数据服从某种模型（Gaussian,Multinomial…）<br>比如线性回归，我们可以认为$p\left(y|x\right) = gaussian\left(y|\theta^{T}x,\sigma^{2} \right)$<br>利用maxmum log likehood对参数进行求解。得到的参数$\theta$与loss function得到的一致。<br><strong>关于sufficient statistics的几点说明</strong></p>
-<ul>
-<li>In the examples above, the sufficient statistics were merely sums (counts) of the data:</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>Distribution</th>
-<th>Sufficient Statistics</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Bernoulli:</td>
-<td>number of heads, tails</td>
-</tr>
-<tr>
-<td>Multinomial:</td>
-<td>number of each type</td>
-</tr>
-<tr>
-<td>Gaussian:</td>
-<td>mean, mean-square</td>
-</tr>
-<tr>
-<td>Regression:</td>
-<td>correlations</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>this is true for all exponential family models: sufficient statistics are the average natural parameters.</li>
-<li>只要指数家族模型才有简单的sufficient statistics<br><strong>Generative v.s Descriminative model</strong></li>
-<li>Generative Model: 直接对$p\left(x,y\right)$进行建模，在预测时用bayes rule来推断条件概率$p\left(y|x\right)$。通过G-M可以做密度估计(density estimation)</li>
-<li>Discriminative Model:直接对$p\left(y|x\right)$进行建模。目标驱动化，如做regression。</li>
-</ul>
-<p><strong>Generative model for classification</strong></p>
-<ul>
-<li>$p\left(x,y\right) = p\left(y\right)p\left(x|y\right)$这里$p\left(y\right)$时某类的prior information。$p\left(x|y\right)$是某一类的条件特征分布。</li>
-<li>prior: Bernoulli or Multimomial。</li>
-<li>class-conditional distribution:如果数据是continuous，一般使用Gaussian class-conditional.$p\left(x|y=k,\theta\right) = \frac{1}{|2\pi \sum^{\frac{1}{2}}|}exp(-\frac{1}{2} \left(\left(x-\mu_k\right) \sum^{-1} \left(x-\mu_k \right)\right))$（Gaussion discriminative model，在Andrew Ng的stanford课上有详细推导）</li>
-<li>Using MLE，The maximum likelihood fit of a Gaussian to some data is the Gaussian whose mean is equal to the data mean and whose covariance is equal to the sample covariance.</li>
-<li>如果data比较少，或者＃ of data &lt;&lt; dim of feature ，有一些以下Regularizations：</li>
-</ul>
-<ol>
-<li>Assuming all covariance are the same!==&gt; fish discriminant analysis</li>
-<li>Assuming the covariance matrix is diagnal…(boundary是linear的)</li>
-<li>add a bit of the identity matrix to each sample covariance. This “fattens it up” in directions where there wasn’t enough data. Equivalent to using a “Wishart prior” on the covariance matrix.(这一块不是很理解)</li>
-</ol>
-<ul>
-<li>既然已经有了$p\left(x|y,\theta\right)$，我们的目标是$p\left(y|x,\theta\right)$，通过bayes rule：<br>$$p\left(y=k|x,\theta\right) = \frac{e^{\beta_k^{T}x}}{\sum_je^{\beta_j^{T}x}}$$<br>此时$\beta_k = \mu_k^{T}\sum^{-1}x-\mu_k^{T}\sum_{-1}\mu_k /2+\log \pi_k$</li>
-</ul>
-<p><strong>Structure learning in bayesian network of tree structure</strong><br>原则上我们要search所有的组合，然后选择likelihood最大的那一个。但是，这个问题可以转换到一个传统的数据结构的问题，我们可以使用最大生成树！<br>既然可以使用最大生成树，我们就要来推导一下这里的edge的weight。likelihood function为:<br>$$l\left(\theta;D \right) = \sum_{x \in V_all}N\left(x\right)\log p\left(x\right) = \sum_x N\left(x\right)\left(\log \left(x_r\right)+\sum_{i\neq r}\log p\left(x_i|\pi_i\right)\right)$$</p>
-<h3 id="Latent_Variable_Learning_in_Graphical_Models(Using_EM_algorithm)">Latent Variable Learning in Graphical Models(Using EM algorithm)</h3><h3 id="Inference_in_Graphical_Model">Inference in Graphical Model</h3>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/07/Graphical-Models-Notes/" data-id="ci8oifzyt000m3kts4dz4g7h0" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-acl-2014-tutorial-language-modeling-using-ml" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-      <header class="article-header">
-        
-  
-    <a class="article-title" href="/2015/04/06/acl-2014-tutorial-language-modeling-using-ml/">acl-2014-tutorial-language_modeling_using_ml</a>
-  
-
-      </header>
-    
-    <time class="article-date" datetime="2015-04-06T14:28:12.000Z" itemprop="datePublished">04-06-2015</time>
-    
-  </div>
-  <div class="article-inner">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>要做AI的project，读了一些paper和tutorial，这里做一些记录。这篇是来自牛津大学NLP组关于language modeling的tutorial。名字叫<strong>New Directions in Vector Space Models of Meaning</strong>。tutorial两个目的：</p>
-<ul>
-<li>Learning vector representations for words</li>
-<li>Learning how to compose them to get vector representations for phrases/sentences/documents<h3 id="Menu四部分:">Menu四部分:</h3></li>
-</ul>
-<ol>
-<li>Distributional Semantics</li>
-<li>Neural Distributed Representations</li>
-<li>Semantic Composition</li>
-<li>Last Words</li>
-</ol>
-<p>在这里我们对每个词用一个vector来表示。这样词与词之间的similarity关系就可以用一些距离度量函数来度量。比如<strong>Cosine Similarity</strong>:<br>$$\cos \left( x,y \right) = \frac{xy}{||x|| \times ||y||}$$<br>或者其他的相似度衡量方法:</p>
-<ul>
-<li>Euclidean Distance</li>
-<li>Lin</li>
-<li>Jaccard</li>
-<li>Dice</li>
-<li>KL divergence<br>有需要的时候再wiki一下吧。。<br>用Vector Representation看起来比较Intuitive motivated。这里分析一下好坏：</li>
-<li>Pros: Easy to obtain, vectors are interpretable</li>
-<li>Cons: Involves a large number of design choices (what weighting scheme? what similarity measure?)</li>
-<li>Problems: Going from word to sentence representations is non-trivial, and no clear intuitions exist.<br>于是问题来了，我们怎么样避免这么多种选择来解决问题？Bengio在2003年提出了用神经网络的方法来对language进行表示。<blockquote>
-<p>Twenty years ago log-linear models freed us from the shackles of simple multinomial parametrisations, but imposed the tyranny of feature engineering.</p>
-</blockquote>
-</li>
-</ul>
-<p>从基本的Log-linear model for classification开始考虑：<br>这里Feature: $\phi \left( x \right) \in R^{D}$，每一个weight$\lambda _k \in R^{D}$（$k \in {1,…K}$）。因此，我们可以如下建立模型：Given 一个instance $x$，判断其归属于哪一类的概率为：<br>$$p\left( C_k|x \right) = \frac{exp\left( \lambda _k^{T} \phi\left(x\right) \right)}{\sum_j^{k}exp\left( \lambda _j^{T} \phi \left( x\right) \right)}$$<br>Log-linear model的参数是$\lambda$，在training中我们需要计算Gradient：<br>$$\frac{\partial}{\partial \lambda_j}[-\log p\left(C_k|x \right)] = p\left(C_j|x \right)\phi \left(x \right) - \delta \left(j,k\right)\phi\left(x\right)$$<br>$\delta \left(j,k \right)$ is the Kronecker delta function which is 1 if $j = k$ and 0 otherwise。<br>有了log-linear model，我们用来提出log-linear language model：<br>Classify the next word $w_n$ given $w_n-1$, $w_n-2$</p>
-<p>TBA…</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/06/acl-2014-tutorial-language-modeling-using-ml/" data-id="ci8oifzyb00023ktsgi6rtf5b" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/language-modeling/">language modeling</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/natural-language-proccessing/">natural language proccessing</a></li></ul>
-
     </footer>
   </div>
   
@@ -384,7 +189,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/05/PRML-reading-notes/" data-id="ci8oifzym000h3ktso0pc3km8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/05/PRML-reading-notes/" data-id="ci98bd64h000eaktsztd4bdge" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PRML/">PRML</a></li></ul>
@@ -418,7 +223,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/05/hello-world/" data-id="ci8oifzy600013ktsrbspzlrm" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/05/hello-world/" data-id="ci98bd6470004aktse94ooixw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -460,12 +265,12 @@
 <p><a href="http://www.mit.edu/~9.520/fall14/" target="_blank" rel="external">9.520: Statistical Learning Theory and Applications</a><br>Spring 2014<br>Tomas Poggio et al<br>MIT<br><a href="http://www.mit.edu/afs/athena/course/9/9.520/www/spring03/" target="_blank" rel="external">Spring 2003</a></p>
 <p><a href="http://web.stanford.edu/class/stats315b/" target="_blank" rel="external">Statistics 315B: Modern Applied Statistics: </a><br>Elements of Statistical Learning II<br>Jerome H. Friedman<br>Stanford</p>
 <p><a href="http://www.cs.ubc.ca/~murphyk/teaching/cs532c_fall04/index.html" target="_blank" rel="external">Probabilistic Graphical Models</a><br>Fall 2004<br>Kevin Murphy<br>UBC</p>
-<h4 id="2-3-2_Some_Graduate_school_videos_and_old_workshops-">2.3.2 Some Graduate school videos and old workshops.</h4><p><strong>With videos</strong><br><a href="http://www.iro.umontreal.ca/~lisa/twiki/bin/view.cgi/Public/DeepLearningWorkshopNIPS2007" target="_blank" rel="external">Deep Learning Workshop: Foundations and Future Directions</a><br><a href="http://courses.cs.washington.edu/courses/cse577/04sp/contents.html#BP" target="_blank" rel="external">http://courses.cs.washington.edu/courses/cse577/04sp/contents.html</a></p>
+<h4 id="2-3-2_Some_Graduate_school_videos_and_old_workshops-">2.3.2 Some Graduate school videos and old workshops.</h4><p><strong>With videos</strong><br><a href="http://www.iro.umontreal.ca/~lisa/twiki/bin/view.cgi/Public/DeepLearningWorkshopNIPS2007" target="_blank" rel="external">Deep Learning Workshop: Foundations and Future Directions</a><br><a href="http://courses.cs.washington.edu/courses/cse577/04sp/contents.html#BP" target="_blank" rel="external">Special Topics in Computer Vision</a>04 Spring</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/05/Resources-of-machine-learning/" data-id="ci8oifzyj000d3ktsmw7mv4ha" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/05/Resources-of-machine-learning/" data-id="ci98bd64f000aaktsu6a8baps" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/learning/">learning</a></li></ul>
