@@ -23,89 +23,212 @@
   
     <link rel="icon" href="/favicon.png">
   
-
   <link rel="stylesheet" href="/css/style.css" type="text/css">
-  
-    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-  
-  
-  
-
-
-  
-
-  
-    <link href='//fonts.useso.com/css?family=Titillium+Web:300,400,600' rel='stylesheet' type='text/css'>
-    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
 </head>
-
 <body>
-  <div id="wrap">
-    <header id="header">
-  <div id="header-outer" class="outer">
-    <div class="container">
-      <div class="container-inner">
-        <div id="header-title">
-          <h1 class="logo-wrap">
-            <a href="/" class="logo"></a>
-          </h1>
-          
-        </div>
-        <div id="header-inner" class="nav-container">
-          <a id="main-nav-toggle" class="nav-icon"></a>
-          <div class="nav-container-inner">
-            <ul id="main-nav">
-              
-                <li class="main-nav-list-item" ><a class="main-nav-list-link" href="/">Home</a></li>
-              
-                <li class="main-nav-list-item" ><a class="main-nav-list-link" href="/archives">Archives</a></li>
-              
-                <li class="main-nav-list-item" ><a class="main-nav-list-link" href="/about">About</a></li>
-              
-            </ul>
-            <nav id="sub-nav">
-              <div id="search-form-wrap">
-                <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="搜索"><input type="hidden" name="q" value="site:http://yoursite.com"></form>
-              </div>
-            </nav>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
-    <div class="container">
-      <div class="main-body container-inner">
-        <div class="main-body-inner">
-          <section id="main">
-            <div class="main-body-header">
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="" class="js-avatar">
+		</a>
 
-              <h1 class="header">未分类</h1>
-            </div>
-            <div class="main-body-content">
-              
-  <article id="post-Comparision-between-Logistic-Regression-and-Naive-Bayes" class="article article-single article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-      <!--  -->
-      
-        <header class="article-header">
-          
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Yong Jiang</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/General-Linear-Model/" style="font-size: 15px;">General Linear Model</a><a href="/tags/Linear-Model/" style="font-size: 15px;">Linear Model</a><a href="/tags/Logistic-regression/" style="font-size: 10px;">Logistic regression</a><a href="/tags/Machine-learning/" style="font-size: 20px;">Machine learning</a><a href="/tags/Naive-bayes/" style="font-size: 10px;">Naive bayes</a><a href="/tags/PRML/" style="font-size: 10px;">PRML</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/learning/" style="font-size: 10px;">learning</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Yong Jiang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Yong Jiang</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-Comparision-between-Logistic-Regression-and-Naive-Bayes" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/08/Comparision-between-Logistic-Regression-and-Naive-Bayes/" class="article-date">
+  	<time datetime="2015-05-08T02:23:10.000Z" itemprop="datePublished">2015-05-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
   
     <h1 class="article-title" itemprop="name">
       Comparision between Logistic Regression and Naive Bayes
     </h1>
   
 
-        </header>
+      </header>
       
-      <p class="article-byline">
-        <a href="/2015/05/08/Comparision-between-Logistic-Regression-and-Naive-Bayes/" class="article-date">
-  <time datetime="2015-05-08T02:23:10.000Z" itemprop="datePublished">2015-05-08</time>
-</a>
-      </p>
-      <div class="article-entry" itemprop="articleBody">
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Logistic-regression/">Logistic regression</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Naive-bayes/">Naive bayes</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
         <p>在有监督学习算法用做分类问题时，有两种算法在实际中应用广泛，它们分别是Logistic regression和Naive bayes。今天我们讨论一下这两类算法在分类问题上面的异同点，以及它们的优缺点。</p>
 <h1 id="1-两类算法介绍">1.两类算法介绍</h1><h2 id="Logistic_Regression">Logistic Regression</h2><p>对于分类问题，我们有一个训练集合N，我们的训练数据是${x^{\left(1\right)},x^{\left(2\right)},…,x^{\left(m\right)}}$，每一个训练数据$x^{\left(i\right)},i \in {1,2,…,n}$有n个特征，$x^{\left(i\right)}$对应的$y^{\left(i\right)}$是一个离散变量，我们考虑简单情况，假设$y^{\left(i\right)}$取binary的离散值，$\theta \in R^{n}$是我们的参数。Logistic regression模型是指我们认为$\theta_i$与$x_i$之间是线性关系，因此我们构建条件概率$P\left(y|x;\theta\right)$，通过将$\sum_{i=1}^{n}\theta_ix_i$映射到0和1之间的概率：<br>$$P\left(y|x;\theta \right)=\frac{1}{1+e^{-\theta^{T}x}}$$</p>
 <h2 id="Naive_Bayes">Naive Bayes</h2><p>Naive Bayes模型是说我有一个很强的假设，这个假设是在$y$给定的条件下，$x_i$相互独立，这个假设看上去非常stupid，但是在实际应用（比如垃圾邮件检测）中能够work非常好。这一方面也验证了Occam’s Theory: Simple model is better。继续主题，既然$x_i$相互独立，我们想对测试数据$\hat{x}$进行预测，可以通过如下方法：<br>$$P\left(\hat{y}=k|\hat{x}\right)=\frac{P\left(\hat{x}|\hat{y}=k\right)P\left(\hat{y}=k\right)}{P\left(\hat{x}\right)}$$<br>在这里，$P\left(x|\hat{y}=k\right)$可以通过条件独立性写成：<br>$$P\left(\hat{x}|\hat{y}=k\right)=\prod_{i=1}^{n}p\left(\hat{x}_i|\hat{y}=k\right)$$<br>而分母可以通过联合概率写成：<br>$$P\left(\hat{x}\right)=P\left(\hat{x}|\hat{y}=0\right)P\left(\hat{y}=0\right)+P\left(\hat{x}|\hat{y}=1\right)P\left(\hat{y}=1\right)$$<br>然后再将$P\left(\hat{x}|\hat{y}=k\right)$式子代入，即可算出$P\left(\hat{y}=k|\hat{x}\right)$。可是$p\left(\hat{x}_i|\hat{y}=k\right)$怎么获得呢？直接通过训练数据进行counting就好了，counting的理论解释是最大化似然函数，这里不再详述。</p>
@@ -122,27 +245,9 @@
 <li>Andrew Ng和Michael Jordan在2001年发了一篇NIPS短文《<a href="http://ai.stanford.edu/~ang/papers/nips01-discriminativegenerative.pdf" target="_blank" rel="external">On Discriminative vs. Generative classifiers: A comparison of logistic regression and naive Bayes</a>》，他们把这两个模型用在各种数据集上面进行测试，最后得到在小数据上面Naive bayes可以取得更好的效果，随着数据的增多、特征维度的增大，Logistic regression的效果更好。这也是因为Naive bayes是生成模型，在有prior的情况下模型能够把数据fit的更好，而Logistic regression属于生成模型，目标驱动化，不去建模联合概率，通过训练数据直接预测输出，因此在数据足够多的情况下能够得到更好一些的效果。</li>
 </ul>
 
-      </div>
-      <footer class="article-footer">
-        <a data-url="http://yoursite.com/2015/05/08/Comparision-between-Logistic-Regression-and-Naive-Bayes/" data-id="ci9f7z66y000vnctsv7bmddvd" class="article-share-link">分享到</a>
-        
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Logistic-regression/">Logistic regression</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Naive-bayes/">Naive bayes</a></li></ul>
-
-      </footer>
-    </div>
-  </article>
-  
-
-            </div>
-          </section>
-          <aside id="sidebar">
-  <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
-  <div class="sidebar-top">
-    <p>关注我 :</p>
-    <ul class="social-links">
       
-    </ul>
+    </div>
+    
   </div>
   
     
@@ -150,50 +255,103 @@
   
   
     <a href="/2015/05/03/From-Linear-Model-to-Generalized-Linear-Model-Part-2/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <p class="article-nav-title">From Linear Model to Generalized Linear Model-Part 2</p>
-      <i class="icon" id="icon-chevron-left"></i>
+      <div class="article-nav-title">From Linear Model to Generalized Linear Model-Part 2</div>
+      <strong class="article-nav-caption">></strong>
     </a>
   
 </nav>
 
   
-  <div class="widgets-container">
-    
-  </div>
-</aside>
-        </div>
-      </div>
-    </div>
-    <footer id="footer">
-  
-  <div class="container">
-    <div class="container-inner">
-      <a id="back-to-top" href="javascript:;"><i class="icon" id="icon-angle-up"></i></a>
-      <div class="credit">
-        <h1 class="logo-wrap">
-          <a href="/" class="logo"></a>
-        </h1>
-        <p>&copy; 2015 Yong Jiang</p>
-        <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
-      </div>
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Comparision-between-Logistic-Regression-and-Naive-Bayes" data-title="Comparision between Logistic Regression and Naive Bayes" data-url="http://yoursite.com/2015/05/08/Comparision-between-Logistic-Regression-and-Naive-Bayes/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 Yong Jiang
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
     </div>
   </div>
 </footer>
+    </div>
     
-
-
-  <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
-
-
-
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
   <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
 
 
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
 
 
-<script src="/js/html-patch.js" type="text/javascript"></script>
-<script src="/js/script.js" type="text/javascript"></script>
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
 
   </div>
 </body>

@@ -26,176 +26,333 @@ ch1 Introduction机器学习主要分为有监督的学习和无监督学习，�
   
     <link rel="icon" href="/favicon.png">
   
-
   <link rel="stylesheet" href="/css/style.css" type="text/css">
-  
-    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-  
-  
-  
-
-
-  
-
-  
-    <link href='//fonts.useso.com/css?family=Titillium+Web:300,400,600' rel='stylesheet' type='text/css'>
-    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
 </head>
-
 <body>
-  <div id="wrap">
-    <header id="header">
-  <div id="header-outer" class="outer">
-    <div class="container">
-      <div class="container-inner">
-        <div id="header-title">
-          <h1 class="logo-wrap">
-            <a href="/" class="logo"></a>
-          </h1>
-          
-        </div>
-        <div id="header-inner" class="nav-container">
-          <a id="main-nav-toggle" class="nav-icon"></a>
-          <div class="nav-container-inner">
-            <ul id="main-nav">
-              
-                <li class="main-nav-list-item" ><a class="main-nav-list-link" href="/">Home</a></li>
-              
-                <li class="main-nav-list-item" ><a class="main-nav-list-link" href="/archives">Archives</a></li>
-              
-                <li class="main-nav-list-item" ><a class="main-nav-list-link" href="/about">About</a></li>
-              
-            </ul>
-            <nav id="sub-nav">
-              <div id="search-form-wrap">
-                <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="搜索"><input type="hidden" name="q" value="site:http://yoursite.com"></form>
-              </div>
-            </nav>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
-    <div class="container">
-      <div class="main-body container-inner">
-        <div class="main-body-inner">
-          <section id="main">
-            <div class="main-body-header">
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="" class="js-avatar">
+		</a>
 
-              <h1 class="header">未分类</h1>
-            </div>
-            <div class="main-body-content">
-              
-  <article id="post-PRML-reading-notes" class="article article-single article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-      <!--  -->
-      
-        <header class="article-header">
-          
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Yong Jiang</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/General-Linear-Model/" style="font-size: 15px;">General Linear Model</a><a href="/tags/Linear-Model/" style="font-size: 15px;">Linear Model</a><a href="/tags/Logistic-regression/" style="font-size: 10px;">Logistic regression</a><a href="/tags/Machine-learning/" style="font-size: 20px;">Machine learning</a><a href="/tags/Naive-bayes/" style="font-size: 10px;">Naive bayes</a><a href="/tags/PRML/" style="font-size: 10px;">PRML</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/learning/" style="font-size: 10px;">learning</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Yong Jiang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Yong Jiang</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-PRML-reading-notes" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/04/05/PRML-reading-notes/" class="article-date">
+  	<time datetime="2015-04-05T13:50:52.000Z" itemprop="datePublished">2015-04-05</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
   
     <h1 class="article-title" itemprop="name">
       PRML reading notes
     </h1>
   
 
-        </header>
+      </header>
       
-      <p class="article-byline">
-        <a href="/2015/04/05/PRML-reading-notes/" class="article-date">
-  <time datetime="2015-04-05T13:50:52.000Z" itemprop="datePublished">2015-04-05</time>
-</a>
-      </p>
-      <div class="article-entry" itemprop="articleBody">
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PRML/">PRML</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
         <p>PRML(Pattern Recognition and Machine Learning)这本书正式开始阅读是从去年九月份。从一开始看的晕晕乎乎，到现在能够看进去，这中间也走了不少弯路。现在重新读一遍，跟随着Toronto大学的<a href="http://www.cs.toronto.edu/~rsalakhu/STA4273_2015/" target="_blank" rel="external">统计机器学习</a>课程，以此blog记录一下阅读笔记。</p>
 <h2 id="ch1_Introduction">ch1 Introduction</h2><p><img src="http://ww1.sinaimg.cn/mw690/6dfbc26fjw1eqv29oa539j20nb0ebgqv.jpg" alt="Machine learning: a big picture"><br>机器学习主要分为有监督的学习和无监督学习，它们之间的区别在于target是否给定。在有监督学习中，target给定，若是离散值，比如给一张动物的图片，判断它是小狗还是小猫，这类问题是分类问题（Classification）；若取连续值，比如预测上海某个小区的房价，则是回归问题（Regression）。而在无监督学习中，target不存在，这里有density estimation, clustering, dimensionality reduction, finding hidden explanation等等任务。<br><img src="http://ww2.sinaimg.cn/mw690/6dfbc26fjw1eqv2dl7cxej20y30frq72.jpg" alt="Classification: an example"></p>
 <h3 id="ch_1-1_Exmaple:_Polynomial_Curve_Fitting">ch 1.1 Exmaple: Polynomial Curve Fitting</h3><p>我们从最简单的回归问题（曲线拟合）开始说起，Given 一系列训练数据$\left( x^{\left( 1\right) },x^{\left( 2\right) },…,x^{\left( N\right) }\right) ^{T}$, 每一个$x^{i}=x^{i}_1…x^{i}_d$。它们对应的target值$y=(y_1,…,y_N)^{T}$。我们认为$x$与$y$的关系是线性关系，因此，我们对每一个$x^{\left( i \right)}$的预测值<br>$${y(x^{\left( i \right)},w) = \left( x^{\left( i \right)} \right)^{T}w}$$<br>这里我们可以写成<br>$${y(X,w) = X^{T}w}$$<br>注意$X$是一个$N \times \left( d+1 \right)$的矩阵。<br>我们希望通过最小化一个loss function来获得最好的$w$，在这里定义loss function$E\left( w \right)$为squred error，<br>$$E\left( w \right) = \frac{1}{2} (Xw - y)^{T}(Xw - y)$$<br>如果$X^{T}X$是非奇异的矩阵，我们可以求出最优解<br>$$w^{*} = \left( X^{T}X \right)^{-1}X^{T}y$$<br>但是在实际中如果N很大，这里矩阵运算将非常耗时。在matlab下面做了个实验，当N=10000时，只是做$X^{T}X$就要耗时13秒。显然这种方法在大规模实际应用中不可取。<br>另外，这里的linear models是指关于coeffients $w$的线性函数，而不是关于$x$的线性函数。<br>好的，既然已经有了线性模型的解决方法，我们用它来对一个$\sin \left( 2\pi x\right)$进行拟合。我们从这个函数中sampling出来一些data，如下图<br><img src="http://ww2.sinaimg.cn/mw690/6dfbc26fjw1eqvt3fb3v2j20ak07v74e.jpg" alt="$\sin \left( 2\pi x\right)$"><br>我们用一个多项式的函数来拟合这些数据，</p>
 <p>TBA…</p>
 
-      </div>
-      <footer class="article-footer">
-        <a data-url="http://yoursite.com/2015/04/05/PRML-reading-notes/" data-id="ci9f7z66j000gnctsaq8grldr" class="article-share-link">分享到</a>
-        
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PRML/">PRML</a></li></ul>
-
-      </footer>
-    </div>
-  </article>
-  
-
-            </div>
-          </section>
-          <aside id="sidebar">
-  <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
-  <div class="sidebar-top">
-    <p>关注我 :</p>
-    <ul class="social-links">
       
-    </ul>
+    </div>
+    
   </div>
   
     
 <nav id="article-nav">
   
     <a href="/2015/04/12/Math-Resourses/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <p class="article-nav-title">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
         
           Math Resourses
         
-      </p>
-      <i class="icon" id="icon-chevron-right"></i>
+      </div>
     </a>
   
   
     <a href="/2015/04/05/Resources-of-machine-learning/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <p class="article-nav-title">Resources of machine learning</p>
-      <i class="icon" id="icon-chevron-left"></i>
+      <div class="article-nav-title">Resources of machine learning</div>
+      <strong class="article-nav-caption">></strong>
     </a>
   
 </nav>
 
   
-  <div class="widgets-container">
-    
-  </div>
-</aside>
-        </div>
-      </div>
-    </div>
-    <footer id="footer">
-  
-  <div class="container">
-    <div class="container-inner">
-      <a id="back-to-top" href="javascript:;"><i class="icon" id="icon-angle-up"></i></a>
-      <div class="credit">
-        <h1 class="logo-wrap">
-          <a href="/" class="logo"></a>
-        </h1>
-        <p>&copy; 2015 Yong Jiang</p>
-        <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
-      </div>
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="PRML-reading-notes" data-title="PRML reading notes" data-url="http://yoursite.com/2015/04/05/PRML-reading-notes/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 Yong Jiang
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
     </div>
   </div>
 </footer>
+    </div>
     
-
-
-  <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
-
-
-
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
   <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
 
 
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
 
 
-<script src="/js/html-patch.js" type="text/javascript"></script>
-<script src="/js/script.js" type="text/javascript"></script>
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
 
   </div>
 </body>
