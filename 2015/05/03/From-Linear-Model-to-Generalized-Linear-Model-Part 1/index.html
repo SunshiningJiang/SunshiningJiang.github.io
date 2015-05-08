@@ -228,7 +228,7 @@
 <li>原本的数据</li>
 <li>原始数据的一些变化，比如：log，exp等</li>
 <li>平方，三次方等</li>
-<li>不同元素之间的关系，如：$x_3 = x_1 \cdotx_2$</li>
+<li>不同元素之间的关系，如：$x_3 = x_1 \cdot x_2$</li>
 </ul>
 <p>既然建立起$x$，一个很直观的想法就是我希望$y$与$x$是一个近似的线性关系。因此，我们定义一个近似$y$的线性函数：<br>$$h_\theta \left(x\right) = \sum_{i=0}^{n} \theta_i x_i = \theta^Tx$$<br>其中，$\theta_i$是参数，可以理解成对每一个 $x_i \in R$ 的一个权重，定义了这个模型，我们接下来希望通过$x$和$y$来获得这些参数。因此，我们定义了一个损失函数 $J\left(\theta \right)$，我们希望平均下来对于每一个$x$输出的$y$及其预测的$h\left(x\right)$之间的平均误差最小。<br>$$J\left(\theta \right) = \frac{1}{2} \sum_{i=1}^{m}\left(h_\theta\left(x^{(i)}\right)-y^{(i)}\right)^2$$<br>在这个式子中$x^{(i)}$和$y^{(i)}$分别代表第$i$个数据的输入和输出。我们可以看出，其实这个函数就是中学学到的最小二乘模型。既然目标函数出来了，我们就需要用一些优化方面的技术来求解我们的参数。</p>
 <h2 id="2-2_求解模型">2.2 求解模型</h2><h3 id="2-2-1_直接求解">2.2.1 直接求解</h3><p>我们可以看出，我们的目标函数是个凸函数，我们把目标函数写成向量的形式，如下：<br>$$J\left(\theta \right) = \frac{1}{2}\left(X\theta - y\right)^T\left(X\theta - y\right)$$<br>这里我们定义$X = $<br>\begin{bmatrix}<br>—(x^{(1)})^T— \\<br>—(x^{(2)})^T— \\<br>:                 \\<br>:               \\<br>—(x^{(m)})^T—<br>\end{bmatrix}<br>m是指训练数据的数量。每一个$x^{(i)}分别指一个数据$<br>\begin{aligned}\end{aligned}<br>$$\bigtriangledown_{\theta} J\left(\theta\right) = X^T\left(X\theta - y\right)$$<br>设偏导数为0，则<br>$$\theta = \left(X^TX\right)^{-1}X^Ty$$<br>这么轻松就得到了$\theta$的值了，得到$\theta$后，我们看一下对于我们的训练数据$X$，我们可以通过下面这个式子得到对应的$\hat{y}$。<br>$$\hat{y} = X \theta = X\left(X^TX\right)^{-1}X^Ty$$<br>我们可以看到，$y$与$\hat{y}$直接是通过一个矩阵来进行映射，我们把矩阵$H=X\left(X^TX\right)^{-1}X^T$这个矩阵称为帽子矩阵（hat matrix）。这里我们停下来分析一下这个式子的几何意义，<br>在一个m维的空间里，$y$就是一个点，所有的$x^{(i)}$ span 出一个平面。我们的目标就是在这个平面上面搜寻出一个点，使得$y$到这个点的距离最小，因此，最好的点就是$y$到平面的最短距离。</p>
