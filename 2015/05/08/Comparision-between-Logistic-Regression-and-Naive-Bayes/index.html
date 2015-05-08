@@ -114,7 +114,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/General-Linear-Model/" style="font-size: 15px;">General Linear Model</a><a href="/tags/Linear-Model/" style="font-size: 15px;">Linear Model</a><a href="/tags/Logistic-regression/" style="font-size: 10px;">Logistic regression</a><a href="/tags/Machine-learning/" style="font-size: 20px;">Machine learning</a><a href="/tags/Naive-bayes/" style="font-size: 10px;">Naive bayes</a><a href="/tags/PRML/" style="font-size: 10px;">PRML</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/learning/" style="font-size: 10px;">learning</a>
+						<a href="/tags/General-Linear-Model/" style="font-size: 10px;">General Linear Model</a><a href="/tags/Generalized-Linear-Model/" style="font-size: 10px;">Generalized Linear Model</a><a href="/tags/Linear-Model/" style="font-size: 15px;">Linear Model</a><a href="/tags/Logistic-regression/" style="font-size: 10px;">Logistic regression</a><a href="/tags/Machine-learning/" style="font-size: 20px;">Machine learning</a><a href="/tags/Naive-bayes/" style="font-size: 10px;">Naive bayes</a><a href="/tags/PRML/" style="font-size: 10px;">PRML</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/learning/" style="font-size: 10px;">learning</a>
 					</div>
 				</section>
 				
@@ -135,7 +135,7 @@
 				
 				<section class="switch-part switch-part4">
 				
-					<div id="js-aboutme">Now I am a graduate student at ShanghaiTech University. I am doing some research project about Machine learning.</div>
+					<div id="js-aboutme">Now I am a graduate student in ShanghaiTech University. I am doing some research project about Machine learning.</div>
 				</section>
 				
 			</div>
@@ -230,7 +230,7 @@
 <li>Logistic regression和Naive bayes建模的都是条件概率$P\left(y=k|x\right)$，对所最终求得的不同类的结果有很好的解释性。而不像SVM，神经网络这样解释性不高。</li>
 </ul>
 <h2 id="不同点">不同点</h2><ul>
-<li><p>Logistic regression在有相关性feature上面学习得到的模型在测试数据的performance更好。也就是说，logistic regression在训练时，不管特征直接有没有相关性，它都能找到最优的参数。而在Naive bayes中，由于我们给定特征直接相互独立的严格设定，在有相关性的feature上面学习到的权重同时变大或变小，它们之间的权重不会相互影响。从这方面来说，如果能够在对参数较好地控制，在损失项方面处理的很好的话，Logistic regression相对Naive bayes在应用时更不会限制在特征工程（feature engineering）上面。</p>
+<li><p>Logistic regression在有相关性feature上面学习得到的模型在测试数据的performance更好。也就是说，logistic regression在训练时，不管特征之间有没有相关性，它都能找到最优的参数。而在Naive bayes中，由于我们给定特征直接相互独立的严格设定，在有相关性的feature上面学习到的权重同时变大或变小，它们之间的权重不会相互影响。从这方面来说，如果能够在对参数较好地控制，在损失项方面处理的很好的话，Logistic regression相对Naive bayes在应用时更不会限制在特征工程（feature engineering）上面。</p>
 </li>
 <li><p>Naive bayes的好处是我没有优化参数这一步，通过训练数据我直接得到一个counting table，这些有助于并行化。</p>
 </li>
