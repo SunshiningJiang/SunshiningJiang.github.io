@@ -33,7 +33,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img lazy-src="" class="js-avatar">
+			<img lazy-src="http://ww1.sinaimg.cn/mw690/6dfbc26fjw1erww25vfwbj208709ddge.jpg" class="js-avatar">
 		</a>
 
 		<hgroup>
@@ -152,7 +152,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img lazy-src="" class="js-avatar">
+				<img lazy-src="http://ww1.sinaimg.cn/mw690/6dfbc26fjw1erww25vfwbj208709ddge.jpg" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author">Yong Jiang</h1>
@@ -223,7 +223,7 @@
       
         <p>在有监督学习算法用做分类问题时，有两种算法在实际中应用广泛，它们分别是Logistic regression和Naive bayes。今天我们讨论一下这两类算法在分类问题上面的异同点，以及它们的优缺点。</p>
 <h1 id="1-两类算法介绍">1.两类算法介绍</h1><h2 id="Logistic_Regression">Logistic Regression</h2><p>对于分类问题，我们有一个训练集合N，我们的训练数据是${x^{\left(1\right)},x^{\left(2\right)},…,x^{\left(m\right)}}$，每一个训练数据$x^{\left(i\right)},i \in {1,2,…,n}$有n个特征，$x^{\left(i\right)}$对应的$y^{\left(i\right)}$是一个离散变量，我们考虑简单情况，假设$y^{\left(i\right)}$取binary的离散值，$\theta \in R^{n}$是我们的参数。Logistic regression模型是指我们认为$\theta_i$与$x_i$之间是线性关系，因此我们构建条件概率$P\left(y|x;\theta\right)$，通过将$\sum_{i=1}^{n}\theta_ix_i$映射到0和1之间的概率：<br>$$P\left(y|x;\theta \right)=\frac{1}{1+e^{-\theta^{T}x}}$$</p>
-<h2 id="Naive_Bayes">Naive Bayes</h2><p>Naive Bayes模型是说我有一个很强的假设，这个假设是在$y$给定的条件下，$x_i$相互独立，这个假设看上去非常stupid，但是在实际应用（比如垃圾邮件检测）中能够work非常好。这一方面也验证了Occam’s Theory: Simple model is better。继续主题，既然$x_i$相互独立，我们想对测试数据$\hat{x}$进行预测，可以通过如下方法：<br>$$P\left(\hat{y}=k|\hat{x}\right)=\frac{P\left(\hat{x}|\hat{y}=k\right)P\left(\hat{y}=k\right)}{P\left(\hat{x}\right)}$$<br>在这里，$P\left(x|\hat{y}=k\right)$可以通过条件独立性写成：<br>$$P\left(\hat{x}|\hat{y}=k\right)=\prod_{i=1}^{n}p\left(\hat{x}_i|\hat{y}=k\right)$$<br>而分母可以通过联合概率写成：<br>$$P\left(\hat{x}\right)=P\left(\hat{x}|\hat{y}=0\right)P\left(\hat{y}=0\right)+P\left(\hat{x}|\hat{y}=1\right)P\left(\hat{y}=1\right)$$<br>然后再将$P\left(\hat{x}|\hat{y}=k\right)$式子代入，即可算出$P\left(\hat{y}=k|\hat{x}\right)$。可是$p\left(\hat{x}_i|\hat{y}=k\right)$怎么获得呢？直接通过训练数据进行counting就好了，counting的理论解释是最大化似然函数，这里不再详述。</p>
+<h2 id="Naive_Bayes">Naive Bayes</h2><p>Naive Bayes模型是说我有一个很强的假设，这个假设是在$y$给定的条件下，$x_i$相互独立，这个假设看上去非常stupid，但是在实际应用（比如垃圾邮件检测）中能够work非常好。这一方面也验证了Occam’s Theory: Simple model is better。继续主题，既然$x_i$相互独立，我们想对测试数据$\hat{x}$进行预测，可以通过如下方法：<br>$$P\left(\hat{y}=k|\hat{x}\right)=\frac{P\left(\hat{x}|\hat{y}=k\right)P\left(\hat{y}=k\right)}{P\left(\hat{x}\right)}$$<br>在这里，$P\left(\hat{x}|\hat{y}=k\right)$可以通过条件独立性写成：<br>$$P\left(\hat{x}|\hat{y}=k\right)=\prod_{i=1}^{n}p\left(\hat{x}_i|\hat{y}=k\right)$$<br>而分母可以通过联合概率写成：<br>$$P\left(\hat{x}\right)=P\left(\hat{x}|\hat{y}=0\right)P\left(\hat{y}=0\right)+P\left(\hat{x}|\hat{y}=1\right)P\left(\hat{y}=1\right)$$<br>然后再将$P\left(\hat{x}|\hat{y}=k\right)$式子代入，即可算出$P\left(\hat{y}=k|\hat{x}\right)$。可是$p\left(\hat{x}_i|\hat{y}=k\right)$怎么获得呢？直接通过训练数据进行counting就好了，counting的理论解释是最大化似然函数，这里不再详述。</p>
 <p>好的，下面我们开始分析Logistic Regression和Naive Bayes的异同点。</p>
 <h1 id="2-两者的异同点">2.两者的异同点</h1><h2 id="相同点">相同点</h2><ul>
 <li>Logistic regression和Naive bayes都是对特征的线性表达$\sum_j\theta_jx_j$，只是区别在于两者所fit的参数不同。</li>
