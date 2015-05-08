@@ -73,24 +73,24 @@
       
         <p>在有监督学习算法用做分类问题时，有两种算法在实际中应用广泛，它们分别是Logistic regression和Naive bayes。今天我们讨论一下这两类算法在分类问题上面的异同点，以及它们的优缺点。</p>
 <h1 id="两类算法介绍">两类算法介绍</h1><h2 id="Logistic_Regression">Logistic Regression</h2><p>对于分类问题，我们有一个训练集合N，我们的训练数据是${x_1,x_2,…,x_m}$，每一个训练数据$x^{\left(i\right)},i \in {1,2,…,n}$有n个特征，$x_i$对应的$y_i$是一个离散变量，我们考虑简单情况，假设$y_i$取binary的离散值，$\theta \in R^{n}$是我们的参数。Logistic regression模型是指我们认为$\theta_i$与$x_i$之间是线性关系，因此我们构建条件概率$P\left(y|x;\theta\right)$，通过将$\sum_i^{n}\theta_ix_i$映射到0和1之间的概率：<br>$$P\left(y|x;\theta \right)=\frac{1}{1+e^{-\theta^{T}x}}$$</p>
-<h2 id="Naive_Bayes">Naive Bayes</h2><p>Naive Bayes模型是说我有一个很强的假设，这个假设是在$y$给定的条件下，$x_i$相互独立，这个假设看上去非常stupid，但是在实际应用（比如垃圾邮件检测）中能够work非常好。这一方面也验证了Occam’s Theory: Simple model is better。继续主题，既然$x_i$相互独立，我们想对测试数据$\hat{x}$进行预测，可以通过如下方法：<br>$$P\left(y=k|x\right)=\frac{P\left(x|y=k\right)P\left(y=k\right)}{P\left(x\right)}$$<br>在这里，$P\left(x|y=k\right)$可以通过条件独立性写成：<br>$$P\left(x|y=k\right)=\pi_{i=1}^{n}p\left(x_i|y=k\right)$$<br>而分母可以通过联合概率写成：<br>$$P\left(x\right)=P\left(x|y=0\right)P\left(y=0\right)+P\left(x|y=1\right)P\left(y=1\right)$$<br>然后再将$P\left(x|y=k\right)$式子代入，即可算出$P\left(y=k|x\right)。可是p\left(x_i|y=k\right)怎么获得呢？直接通过训练数据进行counting就好了，counting的理论解释是最大化似然函数，这里不再详述。</p>
+<h2 id="Naive_Bayes">Naive Bayes</h2><p>Naive Bayes模型是说我有一个很强的假设，这个假设是在$y$给定的条件下，$x_i$相互独立，这个假设看上去非常stupid，但是在实际应用（比如垃圾邮件检测）中能够work非常好。这一方面也验证了Occam’s Theory: Simple model is better。继续主题，既然$x_i$相互独立，我们想对测试数据$\hat{x}$进行预测，可以通过如下方法：<br>$$P\left(\hat{y}=k|\hat{x}\right)=\frac{P\left(\hat{x}|\hat{y}=k\right)P\left(\hat{y}=k\right)}{P\left(\hat{x}\right)}$$<br>在这里，$P\left(x|\hat{y}=k\right)$可以通过条件独立性写成：<br>$$P\left(\hat{x}|\hat{y}=k\right)=\prod_{i=1}^{n}p\left(\hat{x}_i|\hat{y}=k\right)$$<br>而分母可以通过联合概率写成：<br>$$P\left(\hat{x}\right)=P\left(\hat{x}|\hat{y}=0\right)P\left(\hat{y}=0\right)+P\left(\hat{x}|\hat{y}=1\right)P\left(\hat{y}=1\right)$$<br>然后再将$P\left(\hat{x}|\hat{y}=k\right)$式子代入，即可算出$P\left(\hat{y}=k|\hat{x}\right)$。可是$p\left(\hat{x}_i|\hat{y}=k\right)$怎么获得呢？直接通过训练数据进行counting就好了，counting的理论解释是最大化似然函数，这里不再详述。</p>
 <p>好的，下面我们开始分析Logistic Regression和Naive Bayes的异同点。</p>
 <h1 id="相同点与不同点">相同点与不同点</h1><h2 id="相同点">相同点</h2><ul>
 <li>Logistic regression和Naive bayes都是对特征的线性表达$\sum_j\theta_jx_j$，只是区别在于两者所fit的参数不同。</li>
 <li>Logistic regression和Naive bayes建模的都是条件概率$P\left(x|y=k\right)$，对所最终求得的不同类的结果有很好的解释性。而不像SVM，神经网络这样解释性不高。</li>
 </ul>
 <h2 id="不同点">不同点</h2><ul>
-<li><p>Logistic regression在有相关性feature上面学习得到的模型在测试数据的performance更好。也就是说，logistic regression在训练时，不管特征直接有没有相关性，它都能找到最优的参数。而在Naive bayes中，由于我们给定特征直接相互独立的严格设定，在有相关性的feature上面学习到的权重同时变大或变小，它们之间的权重不会相互影响。从这方面来说，如果能够在对参数较好地控制，在损失项方面处理的很好的话，Logistic regression相对Naive bayes在应用时更不会限制在特征工程上面（feature engineering）。</p>
+<li><p>Logistic regression在有相关性feature上面学习得到的模型在测试数据的performance更好。也就是说，logistic regression在训练时，不管特征直接有没有相关性，它都能找到最优的参数。而在Naive bayes中，由于我们给定特征直接相互独立的严格设定，在有相关性的feature上面学习到的权重同时变大或变小，它们之间的权重不会相互影响。从这方面来说，如果能够在对参数较好地控制，在损失项方面处理的很好的话，Logistic regression相对Naive bayes在应用时更不会限制在特征工程（feature engineering）上面。</p>
 </li>
 <li><p>Naive bayes的好处是我没有优化参数这一步，通过训练数据我直接得到一个counting table，这些有助于并行化。</p>
 </li>
-<li>Andrew Ng和Michael Jordan在2001年发了一篇NIPS短文《<a href="http://ai.stanford.edu/~ang/papers/nips01-discriminativegenerative.pdf" target="_blank" rel="external">On Discriminative vs. Generative classifiers: A comparison of logistic regression and naive Bayes</a>》，他们把这两个模型用在各种数据集上面进行测试，最后得到在小数据上面Naive bayes可以取得更好的效果，随着数据的增多、特征维度的增大，Logistic regression的效果更好。这也是因为Naive bayes是生成模型，在有prior的情况下模型能够把数据fit的更好，而Logistic regression属于生成模型，目标驱动化，在数据足够多的情况下能够得到更好一些的效果。</li>
+<li>Andrew Ng和Michael Jordan在2001年发了一篇NIPS短文《<a href="http://ai.stanford.edu/~ang/papers/nips01-discriminativegenerative.pdf" target="_blank" rel="external">On Discriminative vs. Generative classifiers: A comparison of logistic regression and naive Bayes</a>》，他们把这两个模型用在各种数据集上面进行测试，最后得到在小数据上面Naive bayes可以取得更好的效果，随着数据的增多、特征维度的增大，Logistic regression的效果更好。这也是因为Naive bayes是生成模型，在有prior的情况下模型能够把数据fit的更好，而Logistic regression属于生成模型，目标驱动化，不去建模联合概率，通过训练数据直接预测输出，因此在数据足够多的情况下能够得到更好一些的效果。</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/08/Comparision-between-Logistic-Regression-and-Naive-Bayes/" data-id="ci9f39o6e000tf0ts8x8q89q4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/08/Comparision-between-Logistic-Regression-and-Naive-Bayes/" data-id="ci9f3caqk000tpctsj42mk3zl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Logistic-regression/">Logistic regression</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Naive-bayes/">Naive bayes</a></li></ul>
@@ -124,7 +124,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/03/From-Linear-Model-to-Generalized-Linear-Model-Part-2/" data-id="ci9f39o5z000jf0tsfx2m1cne" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/03/From-Linear-Model-to-Generalized-Linear-Model-Part-2/" data-id="ci9f3caq5000jpcts30ls9zsn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/General-Linear-Model/">General Linear Model</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linear-Model/">Linear Model</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li></ul>
@@ -158,7 +158,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/03/hello-world/" data-id="ci9f39o5j0004f0tsadcx4ww3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/03/hello-world/" data-id="ci9f3capp0004pcts0litkf17" class="article-share-link">Share</a>
       
       
     </footer>
@@ -215,7 +215,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/03/From-Linear-Model-to-Generalized-Linear-Model-Part 1/" data-id="ci9f39o5z000pf0ts5toij6i1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/03/From-Linear-Model-to-Generalized-Linear-Model-Part 1/" data-id="ci9f3caq5000ppcts3ndi86ow" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/General-Linear-Model/">General Linear Model</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linear-Model/">Linear Model</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li></ul>
@@ -249,7 +249,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/19/Some-Machine-Learning-Blogs/" data-id="ci9f39o5j0005f0ts5qyuxgvc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/19/Some-Machine-Learning-Blogs/" data-id="ci9f3capp0005pctslwhjf7xf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/">blog</a></li></ul>
@@ -283,7 +283,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/12/Math-Resourses/" data-id="ci9f39o5z000if0tseebo057m" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/12/Math-Resourses/" data-id="ci9f3caq5000ipcts1h3mx17i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -318,7 +318,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/05/PRML-reading-notes/" data-id="ci9f39o5z000ef0ts2vb2mcs0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/05/PRML-reading-notes/" data-id="ci9f3caq5000epctsctzjq9e0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PRML/">PRML</a></li></ul>
@@ -367,7 +367,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/04/05/Resources-of-machine-learning/" data-id="ci9f39o5z000af0ts7vd7exa1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/04/05/Resources-of-machine-learning/" data-id="ci9f3capp000apcts5y61r8id" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/learning/">learning</a></li></ul>
