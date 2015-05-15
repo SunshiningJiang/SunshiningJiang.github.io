@@ -111,7 +111,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Generalized-Linear-Model/" style="font-size: 15px;">Generalized Linear Model</a><a href="/tags/Linear-Model/" style="font-size: 15px;">Linear Model</a><a href="/tags/Logistic-regression/" style="font-size: 10px;">Logistic regression</a><a href="/tags/Machine-learning/" style="font-size: 20px;">Machine learning</a><a href="/tags/Naive-bayes/" style="font-size: 10px;">Naive bayes</a><a href="/tags/PRML/" style="font-size: 10px;">PRML</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/learning/" style="font-size: 10px;">learning</a>
+						<a href="/tags/Deep-learning/" style="font-size: 10px;">Deep learning</a><a href="/tags/Expectation-maximization/" style="font-size: 10px;">Expectation maximization</a><a href="/tags/Generalized-Linear-Model/" style="font-size: 15px;">Generalized Linear Model</a><a href="/tags/Linear-Model/" style="font-size: 15px;">Linear Model</a><a href="/tags/Logistic-regression/" style="font-size: 10px;">Logistic regression</a><a href="/tags/Machine-learning/" style="font-size: 20px;">Machine learning</a><a href="/tags/Naive-bayes/" style="font-size: 10px;">Naive bayes</a><a href="/tags/Natural-language-processing/" style="font-size: 10px;">Natural language processing</a><a href="/tags/PRML/" style="font-size: 10px;">PRML</a><a href="/tags/Parsing/" style="font-size: 10px;">Parsing</a><a href="/tags/Word-Embedding/" style="font-size: 10px;">Word Embedding</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/hidden-variable/" style="font-size: 10px;">hidden variable</a><a href="/tags/learning/" style="font-size: 10px;">learning</a>
 					</div>
 				</section>
 				
@@ -182,6 +182,116 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-Word-Embedding-An-Introduction-and-Its-Application-in-Sentence-Parsing" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/15/Word-Embedding-An-Introduction-and-Its-Application-in-Sentence-Parsing/" class="article-date">
+  	<time datetime="2015-05-15T10:54:39.000Z" itemprop="datePublished">2015-05-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/15/Word-Embedding-An-Introduction-and-Its-Application-in-Sentence-Parsing/">Word Embedding:An Introduction and Its Application in Sentence Parsing</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在组里做了一个报告，关于词向量以及用词向量来做句子parsing的topic。Slides用LaTex的Beamer框架做的，花了很长时间来做= =。slides的下载地址在<a href="http://vdisk.weibo.com/s/z7KwYz-djcF1f/1431688597" target="_blank" rel="external">这里</a>。现在就打算把它整理成一个博文，边写边整理思路。</p>
+<h1 id="1-传统的词的表示方法">1.传统的词的表示方法</h1><p>在自然语言的很多任务当中，我们要对corpus中的词进行建模。因此需要对每个词进行表示，传统的表示方法被称为One-hot Vector，它的意思是我对每个词用一个向量来表示，这个向量的长度是语料库（corpus）的词典的大小。比如一句话“I love ShanghaiTech University”。我可以用如下的表示方法：</p>
+<blockquote>
+<p>“I”=[1,0,0,…,0,0]<br>“love”=[0,0,1,…,0,0]<br>“ShanghaiTech”=[0,0,,…,1,0]<br>“University”=[0,0,,…,0,1]</p>
+</blockquote>
+<h1 id="2-基于矩阵SVD分解的词向量">2.基于矩阵SVD分解的词向量</h1><h1 id="3-基于目标函数迭代的词向量:模型表示">3.基于目标函数迭代的词向量:模型表示</h1><h1 id="4-基于目标函数迭代的词向量:模型学习">4.基于目标函数迭代的词向量:模型学习</h1><h1 id="5-利用词向量来做句子解析">5.利用词向量来做句子解析</h1>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-learning/">Deep learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Natural-language-processing/">Natural language processing</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Parsing/">Parsing</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Word-Embedding/">Word Embedding</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-An-Introduction-to-EM-Algorithm" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/08/An-Introduction-to-EM-Algorithm/" class="article-date">
+  	<time datetime="2015-05-08T09:43:29.000Z" itemprop="datePublished">2015-05-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/08/An-Introduction-to-EM-Algorithm/">An Introduction to EM Algorithm</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>机器学习主要研究如何搭建模型和如何求解模型得到参数，我们知道，在有监督学习的问题当中，模型中所有的变量（variable）都是observed的，我们可以通过变量之间的关系构建似然函数（likelihood），然后最大化似然函数（maximize likelihood）得到参数。比如，在分类问题中，模型中的变量（variable）是输入$X$以及输出$Y$，我们可以构建如下case 1的图模型用来表示，这里Y是离散值。我们可以认为每一类都服从协方差相同的Gaussion分布，这样对整个数据的联合概率进行建模的机器学习模型被称为高斯判别分析（Gaussion Discriminant Analysis）。<br><img src="http://ww4.sinaimg.cn/mw690/6dfbc26fjw1erx14zl3ayj210e0t2779.jpg" alt="图模型表示"></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Expectation-maximization/">Expectation maximization</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hidden-variable/">hidden variable</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-Comparision-between-Logistic-Regression-and-Naive-Bayes" class="article article-type-post" itemscope itemprop="blogPost">
   
