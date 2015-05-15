@@ -5,16 +5,18 @@
   
   <title>An Introduction to EM Algorithm | SunShining</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="机器学习主要研究如何搭建模型和如何求解模型得到参数，我们知道，在有监督学习的问题当中，模型中所有的变量（variable）都是observed的，我们可以通过变量之间的关系构建似然函数（likelihood），然后最大化似然函数（maximize likelihood）得到参数。比如，在分类问题中，模型中的变量（variable）是输入$X$以及输出$Y$，我们可以构建如下case 1的图模型用来">
-<meta property="og:type" content="article">
+  <meta name="description" content="在图模型中，如果我们所有的变量全都是observed的话，就可以用maxmum likelihood estimation来求解参数，但是现实世界是纷繁复杂的，很多时候我们并不能观测到所有的变量。就像上帝已一个无形的手把某一些变量的分布给隐藏了。而在上个世纪的统计牛人就提出了类似于EM算法来对隐变量进行估计和求解。
+K-Means Algorithm比如，在一个分类问题中，通过有lable的训练数">
+<meta property="og:type" content="website">
 <meta property="og:title" content="An Introduction to EM Algorithm">
-<meta property="og:url" content="http://yoursite.com/2015/05/08/An-Introduction-to-EM-Algorithm/index.html">
+<meta property="og:url" content="http://yoursite.com/drafts/An-Introduction-to-EM-Algorithm1.html">
 <meta property="og:site_name" content="SunShining">
-<meta property="og:description" content="机器学习主要研究如何搭建模型和如何求解模型得到参数，我们知道，在有监督学习的问题当中，模型中所有的变量（variable）都是observed的，我们可以通过变量之间的关系构建似然函数（likelihood），然后最大化似然函数（maximize likelihood）得到参数。比如，在分类问题中，模型中的变量（variable）是输入$X$以及输出$Y$，我们可以构建如下case 1的图模型用来">
-<meta property="og:image" content="http://ww4.sinaimg.cn/mw690/6dfbc26fjw1erx14zl3ayj210e0t2779.jpg">
+<meta property="og:description" content="在图模型中，如果我们所有的变量全都是observed的话，就可以用maxmum likelihood estimation来求解参数，但是现实世界是纷繁复杂的，很多时候我们并不能观测到所有的变量。就像上帝已一个无形的手把某一些变量的分布给隐藏了。而在上个世纪的统计牛人就提出了类似于EM算法来对隐变量进行估计和求解。
+K-Means Algorithm比如，在一个分类问题中，通过有lable的训练数">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="An Introduction to EM Algorithm">
-<meta name="twitter:description" content="机器学习主要研究如何搭建模型和如何求解模型得到参数，我们知道，在有监督学习的问题当中，模型中所有的变量（variable）都是observed的，我们可以通过变量之间的关系构建似然函数（likelihood），然后最大化似然函数（maximize likelihood）得到参数。比如，在分类问题中，模型中的变量（variable）是输入$X$以及输出$Y$，我们可以构建如下case 1的图模型用来">
+<meta name="twitter:description" content="在图模型中，如果我们所有的变量全都是observed的话，就可以用maxmum likelihood estimation来求解参数，但是现实世界是纷繁复杂的，很多时候我们并不能观测到所有的变量。就像上帝已一个无形的手把某一些变量的分布给隐藏了。而在上个世纪的统计牛人就提出了类似于EM算法来对隐变量进行估计和求解。
+K-Means Algorithm比如，在一个分类问题中，通过有lable的训练数">
   
     <link rel="alternative" href="/atom.xml" title="SunShining" type="application/atom+xml">
   
@@ -112,7 +114,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Deep-learning/" style="font-size: 10px;">Deep learning</a><a href="/tags/Expectation-maximization/" style="font-size: 10px;">Expectation maximization</a><a href="/tags/Generalized-Linear-Model/" style="font-size: 15px;">Generalized Linear Model</a><a href="/tags/Linear-Model/" style="font-size: 15px;">Linear Model</a><a href="/tags/Logistic-regression/" style="font-size: 10px;">Logistic regression</a><a href="/tags/Machine-learning/" style="font-size: 20px;">Machine learning</a><a href="/tags/Naive-bayes/" style="font-size: 10px;">Naive bayes</a><a href="/tags/Natural-language-processing/" style="font-size: 10px;">Natural language processing</a><a href="/tags/PRML/" style="font-size: 10px;">PRML</a><a href="/tags/Parsing/" style="font-size: 10px;">Parsing</a><a href="/tags/Word-Embedding/" style="font-size: 10px;">Word Embedding</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/hidden-variable/" style="font-size: 10px;">hidden variable</a><a href="/tags/learning/" style="font-size: 10px;">learning</a>
+						<a href="/tags/Deep-learning/" style="font-size: 10px;">Deep learning</a><a href="/tags/Generalized-Linear-Model/" style="font-size: 15px;">Generalized Linear Model</a><a href="/tags/Linear-Model/" style="font-size: 15px;">Linear Model</a><a href="/tags/Logistic-regression/" style="font-size: 10px;">Logistic regression</a><a href="/tags/Machine-learning/" style="font-size: 20px;">Machine learning</a><a href="/tags/Naive-bayes/" style="font-size: 10px;">Naive bayes</a><a href="/tags/Natural-language-processing/" style="font-size: 10px;">Natural language processing</a><a href="/tags/PRML/" style="font-size: 10px;">PRML</a><a href="/tags/Parsing/" style="font-size: 10px;">Parsing</a><a href="/tags/Word-Embedding/" style="font-size: 10px;">Word Embedding</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/learning/" style="font-size: 10px;">learning</a>
 					</div>
 				</section>
 				
@@ -182,11 +184,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-An-Introduction-to-EM-Algorithm" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/05/08/An-Introduction-to-EM-Algorithm/" class="article-date">
-  	<time datetime="2015-05-08T09:43:29.000Z" itemprop="datePublished">2015-05-08</time>
+      <a href="/drafts/An-Introduction-to-EM-Algorithm1.html" class="article-date">
+  	<time datetime="2015-04-09T14:52:54.000Z" itemprop="datePublished">2015-04-09</time>
 </a>
     </div>
   
@@ -208,7 +210,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Expectation-maximization/">Expectation maximization</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hidden-variable/">hidden variable</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/">undefined</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/">undefined</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/">undefined</a></li></ul>
 	</div>
 
         
@@ -219,7 +221,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>机器学习主要研究如何搭建模型和如何求解模型得到参数，我们知道，在有监督学习的问题当中，模型中所有的变量（variable）都是observed的，我们可以通过变量之间的关系构建似然函数（likelihood），然后最大化似然函数（maximize likelihood）得到参数。比如，在分类问题中，模型中的变量（variable）是输入$X$以及输出$Y$，我们可以构建如下case 1的图模型用来表示，这里Y是离散值。我们可以认为每一类都服从协方差相同的Gaussion分布，这样对整个数据的联合概率进行建模的机器学习模型被称为高斯判别分析（Gaussion Discriminant Analysis）。<br><img src="http://ww4.sinaimg.cn/mw690/6dfbc26fjw1erx14zl3ayj210e0t2779.jpg" alt="图模型表示"></p>
+        <p>在图模型中，如果我们所有的变量全都是observed的话，就可以用maxmum likelihood estimation来求解参数，但是现实世界是纷繁复杂的，很多时候我们并不能观测到所有的变量。就像上帝已一个无形的手把某一些变量的分布给隐藏了。而在上个世纪的统计牛人就提出了类似于EM算法来对隐变量进行估计和求解。</p>
+<h1 id="K-Means_Algorithm">K-Means Algorithm</h1><p>比如，在一个分类问题中，通过有lable的训练数据，我们可以学习到一个决策边界，如果我们把训练数据的lable去掉，这时候我们还能够对未来的数据进行预测他们所属的lable吗？这就是聚类问题，一般我们可以使用K-Means算法，K-Means算法的idea是我们对训练数据所属的lable进行迭代，最初我们随机初始化一个中心，然后在每一次迭代中我们对训练数据Assign一个距离它最近的那个中心的lable作为它的lable。因此K-Means算法就如下所示：</p>
+<blockquote>
+<ul>
+<li>Initialize <em>*clusering centroids</em>$\mu_1,\mu_2,…,\mu_k \in R^{n}$</li>
+<li>Repeat until convergence{<br>  For every $i$, set $$c^{i} := argmin_{j} ||x^{\left(i\right)}-\mu<em>j||^{2}$$<br>  For eachj,set $$\mu_j := \frac{\sum\</em>{i=1}^{m}1{c^{\left(i\right)} = j}x^{\left(i\right)}}{\sum_{i=1}^{m}1{c^{\left(i\right)} = j}}}$$<br>}<br>在迭代收敛后，K-Means收敛到局部最小值。这里K-Means类似于Hard EM，因为其在每次迭代时直接为每个data赋一个lable。而不是已概率的形式进行赋值。下面我们就介绍EM算法在聚类中的一个例子，也就是<strong>高斯混合分布</strong>(Mixture of Gaussian)</li>
+</ul>
+</blockquote>
 
       
     </div>
@@ -227,25 +236,6 @@
   </div>
   
     
-<nav id="article-nav">
-  
-    <a href="/2015/05/15/Word-Embedding-An-Introduction-and-Its-Application-in-Sentence-Parsing/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Word Embedding:An Introduction and Its Application in Sentence Parsing
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2015/05/08/Comparision-between-Logistic-Regression-and-Naive-Bayes/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Comparision between Logistic Regression and Naive Bayes</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
-
   
 </article>
 
@@ -269,7 +259,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="An-Introduction-to-EM-Algorithm" data-title="An Introduction to EM Algorithm" data-url="http://yoursite.com/2015/05/08/An-Introduction-to-EM-Algorithm/"></div>
+	<div class="ds-thread" data-thread-key="undefined" data-title="An Introduction to EM Algorithm" data-url="http://yoursite.com/drafts/An-Introduction-to-EM-Algorithm1.html"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
