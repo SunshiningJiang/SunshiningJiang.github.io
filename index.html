@@ -111,7 +111,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Deep-learning/" style="font-size: 15px;">Deep learning</a><a href="/tags/Generalized-Linear-Model/" style="font-size: 15px;">Generalized Linear Model</a><a href="/tags/Linear-Model/" style="font-size: 15px;">Linear Model</a><a href="/tags/Logistic-regression/" style="font-size: 10px;">Logistic regression</a><a href="/tags/Machine-learning/" style="font-size: 20px;">Machine learning</a><a href="/tags/Naive-bayes/" style="font-size: 10px;">Naive bayes</a><a href="/tags/Natural-language-processing/" style="font-size: 15px;">Natural language processing</a><a href="/tags/PRML/" style="font-size: 10px;">PRML</a><a href="/tags/Parsing/" style="font-size: 15px;">Parsing</a><a href="/tags/Word-Embedding/" style="font-size: 15px;">Word Embedding</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/learning/" style="font-size: 10px;">learning</a>
+						<a href="/tags/Deep-learning/" style="font-size: 10px;">Deep learning</a><a href="/tags/Generalized-Linear-Model/" style="font-size: 15px;">Generalized Linear Model</a><a href="/tags/Linear-Model/" style="font-size: 15px;">Linear Model</a><a href="/tags/Logistic-regression/" style="font-size: 10px;">Logistic regression</a><a href="/tags/Machine-learning/" style="font-size: 20px;">Machine learning</a><a href="/tags/Naive-bayes/" style="font-size: 10px;">Naive bayes</a><a href="/tags/Natural-language-processing/" style="font-size: 10px;">Natural language processing</a><a href="/tags/PRML/" style="font-size: 10px;">PRML</a><a href="/tags/Parsing/" style="font-size: 10px;">Parsing</a><a href="/tags/Word-Embedding/" style="font-size: 10px;">Word Embedding</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/learning/" style="font-size: 10px;">learning</a>
 					</div>
 				</section>
 				
@@ -182,81 +182,6 @@
 	</div>
 </nav>
       <div class="body-wrap">
-  
-    <article id="post-Word-Embedding-An-Introduction-and-Its-Application-in-Sentence-Parsing" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/05/15/Word-Embedding-An-Introduction-and-Its-Application-in-Sentence-Parsing/" class="article-date">
-  	<time datetime="2015-05-15T10:54:39.000Z" itemprop="datePublished">2015-05-15</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/15/Word-Embedding-An-Introduction-and-Its-Application-in-Sentence-Parsing/">Word Embedding:An Introduction and Its Application in Sentence Parsing - Part 1</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近在组里做了一个报告，关于词向量以及用词向量来做句子parsing。Slides用LaTex 的Beamer框架做的，花了很长时间来做= =。slides的下载地址在<a href="http://vdisk.weibo.com/s/z7KwYz-djcF1f/1431688597" target="_blank" rel="external">这里</a>。现在就打算把它整理成一个博文，边写边整理思路。</p>
-<h1 id="1-传统的词的表示方法">1.传统的词的表示方法</h1><h2 id="1-1-One-hot_Vector">1.1.One-hot Vector</h2><p>在自然语言的很多任务当中，我们要对corpus中的词进行建模。因此需要对每个词进行表示，传统的表示方法被称为One-hot Vector，它的意思是我对每个词用一个向量来表示，这个向量的长度是语料库（corpus）的词典的大小。比如一句话“<em>I love ShanghaiTech University</em>”。我可以用<code>如下</code>的表示方法：</p>
-<blockquote>
-<p>“I”=[1,0,0,…,0,0]<br>“love”=[0,0,1,…,0,0]<br>“ShanghaiTech”=[0,0,,…,1,0]<br>“University”=[0,0,,…,0,1]</p>
-</blockquote>
-<p>这样的好处是对于一个向量，我看它哪一维度是1就可以代表那个词。坏处也很明显：</p>
-<ul>
-<li>如果在一个很大的语料库下，词典的维数会很高，这样在以后的计算中cost会很高。</li>
-<li>它不能抓取词与词之间的语义关系。<h2 id="1-2-基于类别词的表示">1.2.基于类别词的表示</h2>有一类对词的表示就是对其Assign一个Lable或者一个Lable的分布。比如在主题模型中，我们对每一个文档的每一个词通过生成模型来生成它。这个生成模型的过程是：<br>对于每一个文档，</li>
-</ul>
-<ol>
-<li>从一个泊松分布中Sample该文档中词的数量。</li>
-<li>从一个Direchlet分布中Sample该文档所属的topic $\theta$</li>
-<li>对于这篇文档N个词中的每一个词，<br> a). Sample一个主题$z_n \sim Multinomial \left(\theta\right)$<br> b). 从$p\left(w_n|z_n,\beta \right)$中Sample一个词。$p\left(w_n|z_n,\beta \right)$这个概率分布函数是一个多项式分布，它是指在主题给定条件下产生词$w_n$的概率。</li>
-</ol>
-<p><img src="http://ww4.sinaimg.cn/mw690/6dfbc26fjw1es563cmzq0j20vl0h4n33.jpg" alt="主题模型的一个例子"></p>
-<p>[Blei, David M., Andrew Y. Ng, and Michael I. Jordan. “Latent dirichlet allocation.” JMLR 2003.]<br>在上图中，左边的四种颜色的方框是四个主题（topic），在每个topic下的word服从多项式分布（multinomial）。如何产生这篇文章的所有词呢，我们通过右边“折方图”（表示每一个文档的topic分布），对于该分布中的每一个topic我们来通过$P\left(w_n|z_n,\beta \right)$生成word，由于文档的topic不是固定的（是一个随机变量，服从多项式分布），对于每一个topic我们都来产生words，因此我们最后得到多数的words很大程度上能够对那个概率比较大的topic的一种表示。<br><img src="http://ww3.sinaimg.cn/mw690/6dfbc26fjw1es5633xm2sj20qq0ex76u.jpg" alt="主题模型"><br>[Blei, David M., Andrew Y. Ng, and Michael I. Jordan. “Latent dirichlet allocation.” JMLR 2003.]<br>上图是LDA的图模型的表示，$\alpha$,$\eta$是超参数，在训练整个模型之前要确定好。$\theta$,$Z$,$\beta$是我们希望来做推断（inference）的随机变量。在整个模型中我们只可观察到D个文档，每个文档有$W_d$个词。</p>
-<h1 id="2-基于矩阵SVD分解的词向量">2.基于矩阵SVD分解的词向量</h1><p>第二部分我想讨论一下基于矩阵分解的词向量的方法，我们的目的是获得词典中每个词的一个向量表示。那很直接的想法就是我通过语料库来构建一个Co-occurrence矩阵，矩阵的行和列均代表词典的每个词。矩阵中的每一个值是在语料库中相邻词一起出现的次数。下面我们举个例子：<br>我们现在有如下的语料库：</p>
-<blockquote>
-<p>I love you.<br>I love you.<br>I love you.<br>I like you.<br>I like you.<br>I hate her.</p>
-</blockquote>
-<p>通过这个语料库我们可以构建这个Co-occurrence矩阵。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt  </span><br><span class="line">la = np.linalg</span><br><span class="line">words = [<span class="string">"I"</span>,<span class="string">"love"</span>,<span class="string">"you"</span>,<span class="string">"her"</span>,<span class="string">"hate"</span>,<span class="string">"like"</span>]</span><br><span class="line">X = np.array([[<span class="number">0</span>,<span class="number">3</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>],</span><br><span class="line">			  [<span class="number">3</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>],</span><br><span class="line">			  [<span class="number">0</span>,<span class="number">3</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">2</span>],</span><br><span class="line">			  [<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>],</span><br><span class="line">			  [<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>],</span><br><span class="line">			  [<span class="number">2</span>,<span class="number">0</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>]])</span><br><span class="line">U,s,Vh = la.svd(X,full_matrices = <span class="keyword">False</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> xrange(len(words)):</span><br><span class="line">	plt.text(U[i,<span class="number">0</span>],U[i,<span class="number">1</span>],words[i])</span><br><span class="line">	plt.plot(U[i,<span class="number">0</span>],U[i,<span class="number">1</span>])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></p>
-<p>这个矩阵就是代码中的变量$X$。我们去分解后的$U$矩阵的前两列的值作为每一个词向量。可视化看一下结果：<br><img src="http://ww1.sinaimg.cn/mw690/6dfbc26fjw1es5638ftj3j20fs0bsq35.jpg" alt="用SVD方法来学词向量"><br>我们可以看到，很多信息可以被抓取到，比如，word <code>I</code>和word <code>you</code>在几何关系上面很近。当然，由于语料库很少，深层次的语义还没有被挖掘。这样的方法有什么缺陷呢?可想而知，当语料库很大的时候，词典非常长，矩阵就特别大，我们很难对这个这个矩阵进行SVD分解。于是Bengio等人就在2003年提出了基于神经网络的方法来解决这类问题，后续有很多的变种，都是基于目标函数迭代的思路来得到词向量。我们在下一篇博客在讨论。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-learning/">Deep learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Natural-language-processing/">Natural language processing</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Parsing/">Parsing</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Word-Embedding/">Word Embedding</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
   
     <article id="post-Word-Embedding-An-Introduction-and-Its-Application-in-Sentence-Parsing-Part-1" class="article article-type-post" itemscope itemprop="blogPost">
   
