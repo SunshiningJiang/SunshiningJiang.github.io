@@ -229,7 +229,9 @@
 <blockquote>
 <p><code>Word embedding is the</code> collective name for a set of language modeling and feature learning techniques in natural language processing where words from the vocabulary…<br>Word <code>embedding is the collective</code> name for a set of language modeling and feature learning techniques in natural language processing where words from the vocabulary…<br>Word embedding <code>is the collective name</code> for a set of language modeling and feature learning techniques in natural language processing where words from the vocabulary…<br>…</p>
 </blockquote>
-<p>对于每一个这样的窗口，我们可以构建一个神经网络来对其中的语言模型进行建模。这就是Bengio等人2003年的工作：<br><img src="http://ww1.sinaimg.cn/mw690/6dfbc26fjw1es56311p47j20pt0ltq7a.jpg" alt="Simple Neural Network Model"><br>输入层有n-1个词，输出层包括dictionary中所有词的概率。输入层到隐藏层是通过一个Tanh函数来映射。算出Tanh后的假设我们希望在对每个词用一个$d$维度的向量来表示。因此输入的</p>
+<p>对于每一个这样的窗口，我们可以构建一个神经网络来对其中的语言模型进行建模。这就是Bengio等人2003年的工作：<br><img src="http://ww1.sinaimg.cn/mw690/6dfbc26fjw1es56311p47j20pt0ltq7a.jpg" alt="Simple Neural Network Model"><br>输入层有n-1个词，输出层包括dictionary中所有词的概率。输入层到隐藏层是通过一个Tanh函数来映射。算出Tanh后的假设我们希望在对每个词用一个$d$维度的向量来表示。因此输入的One-hot vector 通过一个look up table转换成d维的词向量表示（神经网络中的第一层到第二层）。从第二层到第三层是指将前n-1个词向量左乘一个H矩阵，映射到隐藏层。隐藏层到输出层是一个线性映射。因此我们可以得到每一个小窗口的目标函数：<br>$$f\left(w_c,w_{c-1},…,w_{c-n+1}\right)=P\left(w_c|w_{c-1},…,w_{c-n+1}\right)=\frac{e^{y_{w_c}}}{\sum_i e^{y_i}}$$<br>对于每个句子，我们有$len \left(sentence\right)-n$个窗口，那对于所有的句子来说，假设一共有$C$个窗口，则我们可以得到目标函数：<br>$$J(\theta)=\frac{1}{C}\sum_{c=n}^{C}\log f(w_c,w_{c-1},…,w_{c-n+1};\theta)+R(\theta)$$<br>每一个$f$都可以用上面的式子来算，$R(\theta)$是正则项，在神经网络，尤其是深度学习中很常见，一般是参数的$l_2$范数，其目的为了防止overfitting。对于每一个$y_{w_c}$我们应该如何求呢? 就像刚才所说，求这个output的过程就是一个forward process：<br>$$y=b+Wx+Utanh(d+Hx)$$<br>这里的式子比我们刚才所说的forward process多了一项，即$Wx$。在Bengio的paper中他解释到添加这一层可以使得训练速度更快，但是使得神经网络学习到更好的参数，因此$W$可以设置为0。<br>得到整个的目标函数，我们希望求解所有的参数:$W,U,x,d,b$。用老方法：Stochastic Gradient Desent。我们在接下来的博客里会举个例子来看一下一般神经网络模型该如何学习参数。</p>
+<p>=================待更新=================</p>
+<h1 id="3-Continuous_Bag_of_Words_Model">3.Continuous Bag of Words Model</h1><p>TBA…</p>
 
       
     </div>
