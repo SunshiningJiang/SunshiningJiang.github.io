@@ -111,7 +111,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Deep-learning/" style="font-size: 10px;">Deep learning</a><a href="/tags/Generalized-Linear-Model/" style="font-size: 15px;">Generalized Linear Model</a><a href="/tags/Linear-Model/" style="font-size: 15px;">Linear Model</a><a href="/tags/Logistic-regression/" style="font-size: 10px;">Logistic regression</a><a href="/tags/Machine-learning/" style="font-size: 20px;">Machine learning</a><a href="/tags/Naive-bayes/" style="font-size: 10px;">Naive bayes</a><a href="/tags/Natural-language-processing/" style="font-size: 10px;">Natural language processing</a><a href="/tags/PRML/" style="font-size: 10px;">PRML</a><a href="/tags/Parsing/" style="font-size: 10px;">Parsing</a><a href="/tags/Word-Embedding/" style="font-size: 10px;">Word Embedding</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/learning/" style="font-size: 10px;">learning</a>
+						<a href="/tags/Deep-learning/" style="font-size: 15px;">Deep learning</a><a href="/tags/Generalized-Linear-Model/" style="font-size: 15px;">Generalized Linear Model</a><a href="/tags/Linear-Model/" style="font-size: 15px;">Linear Model</a><a href="/tags/Logistic-regression/" style="font-size: 10px;">Logistic regression</a><a href="/tags/Machine-learning/" style="font-size: 20px;">Machine learning</a><a href="/tags/Naive-bayes/" style="font-size: 10px;">Naive bayes</a><a href="/tags/Natural-language-processing/" style="font-size: 15px;">Natural language processing</a><a href="/tags/Parsing/" style="font-size: 15px;">Parsing</a><a href="/tags/Word-Embedding/" style="font-size: 15px;">Word Embedding</a><a href="/tags/blog/" style="font-size: 10px;">blog</a><a href="/tags/learning/" style="font-size: 10px;">learning</a>
 					</div>
 				</section>
 				
@@ -182,6 +182,79 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-Word-Embedding-An-Introduction-and-Its-Application-in-Sentence-Parsing-Part-2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/16/Word-Embedding-An-Introduction-and-Its-Application-in-Sentence-Parsing-Part-2/" class="article-date">
+  	<time datetime="2015-05-16T08:16:41.000Z" itemprop="datePublished">2015-05-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/16/Word-Embedding-An-Introduction-and-Its-Application-in-Sentence-Parsing-Part-2/">Word Embedding:An Introduction and Its Application in Sentence Parsing - Part 2</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>续上，这篇博客我们来讨论一下基于迭代策略的词向量的学习。主要想介绍一下四个相关的神经网络来学词向量。</p>
+<h1 id="1-_语言模型（Language_Modeling）">1. 语言模型（Language Modeling）</h1><p>所有用在NLP中的神经网络模型都是基于语言模型来构建的。我们知道，一篇文章是由一系列的句子组成，每个句子都是由一系列的词组成。我们现在有单独的词（Atom），我们希望构建一系列的句子，从而构建整篇文章。在自然语言处理中有一个很出名的模型叫做N-gram 模型，它是将马尔科夫假设（Makov Assumptions）用在句子的生成过程中。例如这么一个句子：</p>
+<blockquote>
+<p>I am a graduate student in ShanghaiTech University.</p>
+</blockquote>
+<h1 id="1-1-单纯的词袋模型（Bag_of_Words）">1.1.单纯的词袋模型（Bag of Words）</h1><p>有图有真相！前一阵在微博上面看到下面的这个图很有意思。<br><img src="http://ww2.sinaimg.cn/mw690/6dfbc26fjw1es669t3064j20ce0higpi.jpg" alt="Bag of Words Model"><br>BoW是指，所有的词之间相互没有关系，即在构建整个句子中不考虑词与词的顺序。因此，上面的句子跟下面的句子本质上表达的意义相同：</p>
+<blockquote>
+<p>University student am graduate I ShanghaiTech a in.</p>
+</blockquote>
+<p>这看起来很荒唐，但实际上像上一篇博客所说的LDA模型就是这么做的，在做主题建模时work的非常好。当然，这是看应用的。在复杂的问题下如何做出<code>正确的Assumption</code>正是Machine Learning想要研究的问题。对于上面这个句子，我们计算产生它的概率，可以通过这些词的联合概率来计算：<br>$$P\left(w^{(1)},w^{(2)},…,w^{(n)}\right)=\prod_{i=1}^{n}P\left(w^{(i)}\right)$$</p>
+<p>但是，在产生句子这个问题时，Bags of Words模型肯定不够好，因为人在理解一句话中的某个词都会依靠其上下文的关系。因此我们可以把词与其前面n-1个词的关系加进来，这就是n-gram模型。</p>
+<h1 id="1-2-Binary_Gram_&amp;_Triple_Gram">1.2.Binary Gram &amp; Triple Gram</h1><p>很简单，在计算一个句子产生的概率时把每个词与其前面n-1个词的关系考虑进来，可以得到：<br>Binary Gram:$P\left(w^{(1)},w^{(2)},…,w^{(n)}\right)=\prod_{i=2}^{n}P\left(w^{(i)}|w^{(i-1)}\right)P\left(w^{(1)}\right)$<br>Triple Gram:$P\left(w^{(1)},w^{(2)},…,w^{(n)}\right)=\prod_{i=3}^{n}P\left(w^{(i)}|w^{(i-1)},w^{(i-2)}\right)P\left(w^{(2)}|w^{(1)}\right)P\left(w^{(1)}\right)$<br>同样可以考虑前n-1个词的关系，但是，随着n的增大，模型复杂度也会随之增大。因为，实际应用中如何选择一个好的n也很有讲究，这在Machine Learning中被称为Bias-Variance Trade-off。实际应用中，我们组的师兄一般用Binary Gram或者Triple Gram就可以表达足够的信息了。</p>
+<h1 id="2-A_Simple_Neural_Network_Model_for_Word_Embedding">2.A Simple Neural Network Model for Word Embedding</h1><p>我们在既然讨论了语言模型，就想把语言模型的idea用来构建神经网络，以此对词进行表示。在n-gram模型中，我们用前n-1个词来对第n个词进行表示。那么在神经网络中我们也可以这么做，我们的输入是n-1个词的One-hot Vectors，预测输出是第n个词。如何在一个句子中有多少个这样的神经网络呢，我们来举个例子，对于下面这个句子：</p>
+<blockquote>
+<p>Word embedding is the collective name for a set of language modeling and feature learning techniques in natural language processing where words from the vocabulary…</p>
+</blockquote>
+<p>我们可以构建多个窗口（window），每个窗口的大小是n。因此随着窗口的移动，一个句子可以得到$len \left(sentence\right)-n$个窗口，如下：</p>
+<blockquote>
+<p><code>Word embedding is the</code> collective name for a set of language modeling and feature learning techniques in natural language processing where words from the vocabulary…<br>Word <code>embedding is the collective</code> name for a set of language modeling and feature learning techniques in natural language processing where words from the vocabulary…<br>Word embedding <code>is the collective name</code> for a set of language modeling and feature learning techniques in natural language processing where words from the vocabulary…<br>…</p>
+</blockquote>
+<p>对于每一个这样的窗口，我们可以构建一个神经网络来对其中的语言模型进行建模。这就是Bengio等人2003年的工作：<br><img src="http://ww1.sinaimg.cn/mw690/6dfbc26fjw1es56311p47j20pt0ltq7a.jpg" alt="Simple Neural Network Model"><br>输入层有n-1个词，输出层包括dictionary中所有词的概率。输入层到隐藏层是通过一个Tanh函数来映射。算出Tanh后的假设我们希望在对每个词用一个$d$维度的向量来表示。因此输入的</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-learning/">Deep learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Natural-language-processing/">Natural language processing</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Parsing/">Parsing</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Word-Embedding/">Word Embedding</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-Word-Embedding-An-Introduction-and-Its-Application-in-Sentence-Parsing-Part-1" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -591,62 +664,6 @@
     
     <div class="article-info article-info-index">
       
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-PRML-reading-notes" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/04/05/PRML-reading-notes/" class="article-date">
-  	<time datetime="2015-04-05T13:50:52.000Z" itemprop="datePublished">2015-04-05</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/05/PRML-reading-notes/">PRML reading notes</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>PRML(Pattern Recognition and Machine Learning)这本书正式开始阅读是从去年九月份。从一开始看的晕晕乎乎，到现在能够看进去，这中间也走了不少弯路。现在重新读一遍，跟随着Toronto大学的<a href="http://www.cs.toronto.edu/~rsalakhu/STA4273_2015/" target="_blank" rel="external">统计机器学习</a>课程，以此blog记录一下阅读笔记。</p>
-<h2 id="ch1_Introduction">ch1 Introduction</h2><p><img src="http://ww1.sinaimg.cn/mw690/6dfbc26fjw1eqv29oa539j20nb0ebgqv.jpg" alt="Machine learning: a big picture"><br>机器学习主要分为有监督的学习和无监督学习，它们之间的区别在于target是否给定。在有监督学习中，target给定，若是离散值，比如给一张动物的图片，判断它是小狗还是小猫，这类问题是分类问题（Classification）；若取连续值，比如预测上海某个小区的房价，则是回归问题（Regression）。而在无监督学习中，target不存在，这里有density estimation, clustering, dimensionality reduction, finding hidden explanation等等任务。<br><img src="http://ww2.sinaimg.cn/mw690/6dfbc26fjw1eqv2dl7cxej20y30frq72.jpg" alt="Classification: an example"></p>
-<h3 id="ch_1-1_Exmaple:_Polynomial_Curve_Fitting">ch 1.1 Exmaple: Polynomial Curve Fitting</h3><p>我们从最简单的回归问题（曲线拟合）开始说起，Given 一系列训练数据$\left( x^{\left( 1\right) },x^{\left( 2\right) },…,x^{\left( N\right) }\right) ^{T}$, 每一个$x^{i}=x^{i}_1…x^{i}_d$。它们对应的target值$y=(y_1,…,y_N)^{T}$。我们认为$x$与$y$的关系是线性关系，因此，我们对每一个$x^{\left( i \right)}$的预测值<br>$${y(x^{\left( i \right)},w) = \left( x^{\left( i \right)} \right)^{T}w}$$<br>这里我们可以写成<br>$${y(X,w) = X^{T}w}$$<br>注意$X$是一个$N \times \left( d+1 \right)$的矩阵。<br>我们希望通过最小化一个loss function来获得最好的$w$，在这里定义loss function$E\left( w \right)$为squred error，<br>$$E\left( w \right) = \frac{1}{2} (Xw - y)^{T}(Xw - y)$$<br>如果$X^{T}X$是非奇异的矩阵，我们可以求出最优解<br>$$w^{*} = \left( X^{T}X \right)^{-1}X^{T}y$$<br>但是在实际中如果N很大，这里矩阵运算将非常耗时。在matlab下面做了个实验，当N=10000时，只是做$X^{T}X$就要耗时13秒。显然这种方法在大规模实际应用中不可取。<br>另外，这里的linear models是指关于coeffients $w$的线性函数，而不是关于$x$的线性函数。<br>好的，既然已经有了线性模型的解决方法，我们用它来对一个$\sin \left( 2\pi x\right)$进行拟合。我们从这个函数中sampling出来一些data，如下图<br><img src="http://ww2.sinaimg.cn/mw690/6dfbc26fjw1eqvt3fb3v2j20ak07v74e.jpg" alt="$\sin \left( 2\pi x\right)$"><br>我们用一个多项式的函数来拟合这些数据，</p>
-<p>TBA…</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PRML/">PRML</a></li></ul>
-	</div>
-
       
 
       
