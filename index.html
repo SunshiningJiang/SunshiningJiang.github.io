@@ -214,13 +214,13 @@
 <blockquote>
 <p>I am a graduate student in ShanghaiTech University.</p>
 </blockquote>
-<h1 id="1-1-单纯的词袋模型（Bag_of_Words）">1.1.单纯的词袋模型（Bag of Words）</h1><p>有图有真相！前一阵在微博上面看到下面的这个图很有意思。<br><img src="http://ww2.sinaimg.cn/mw690/6dfbc26fjw1es669t3064j20ce0higpi.jpg" alt="Bag of Words Model"><br>BoW是指，所有的词之间相互没有关系，即在构建整个句子中不考虑词与词的顺序。因此，上面的句子跟下面的句子本质上表达的意义相同：</p>
+<h2 id="1-1-单纯的词袋模型（Bag_of_Words）">1.1.单纯的词袋模型（Bag of Words）</h2><p>有图有真相！前一阵在微博上面看到下面的这个图很有意思。<br><img src="http://ww2.sinaimg.cn/mw690/6dfbc26fjw1es669t3064j20ce0higpi.jpg" alt="Bag of Words Model"><br>BoW是指，所有的词之间相互没有关系，即在构建整个句子中不考虑词与词的顺序。因此，上面的句子跟下面的句子本质上表达的意义相同：</p>
 <blockquote>
 <p>University student am graduate I ShanghaiTech a in.</p>
 </blockquote>
 <p>这看起来很荒唐，但实际上像上一篇博客所说的LDA模型就是这么做的，在做主题建模时work的非常好。当然，这是看应用的。在复杂的问题下如何做出<code>正确的Assumption</code>正是Machine Learning想要研究的问题。对于上面这个句子，我们计算产生它的概率，可以通过这些词的联合概率来计算：<br>$$P\left(w^{(1)},w^{(2)},…,w^{(n)}\right)=\prod_{i=1}^{n}P\left(w^{(i)}\right)$$</p>
 <p>但是，在产生句子这个问题时，Bags of Words模型肯定不够好，因为人在理解一句话中的某个词都会依靠其上下文的关系。因此我们可以把词与其前面n-1个词的关系加进来，这就是n-gram模型。</p>
-<h1 id="1-2-Binary_Gram_&amp;_Triple_Gram">1.2.Binary Gram &amp; Triple Gram</h1><p>很简单，在计算一个句子产生的概率时把每个词与其前面n-1个词的关系考虑进来，可以得到：<br>Binary Gram:$P\left(w^{(1)},w^{(2)},…,w^{(n)}\right)=\prod_{i=2}^{n}P\left(w^{(i)}|w^{(i-1)}\right)P\left(w^{(1)}\right)$<br>Triple Gram:$P\left(w^{(1)},w^{(2)},…,w^{(n)}\right)=\prod_{i=3}^{n}P\left(w^{(i)}|w^{(i-1)},w^{(i-2)}\right)P\left(w^{(2)}|w^{(1)}\right)P\left(w^{(1)}\right)$<br>同样可以考虑前n-1个词的关系，但是，随着n的增大，模型复杂度也会随之增大。因为，实际应用中如何选择一个好的n也很有讲究，这在Machine Learning中被称为Bias-Variance Trade-off。实际应用中，我们组的师兄一般用Binary Gram或者Triple Gram就可以表达足够的信息了。</p>
+<h2 id="1-2-Binary_Gram_&amp;_Triple_Gram">1.2.Binary Gram &amp; Triple Gram</h2><p>很简单，在计算一个句子产生的概率时把每个词与其前面n-1个词的关系考虑进来，可以得到：<br>Binary Gram:$P\left(w^{(1)},w^{(2)},…,w^{(n)}\right)=\prod_{i=2}^{n}P\left(w^{(i)}|w^{(i-1)}\right)P\left(w^{(1)}\right)$<br>Triple Gram:$P\left(w^{(1)},w^{(2)},…,w^{(n)}\right)=\prod_{i=3}^{n}P\left(w^{(i)}|w^{(i-1)},w^{(i-2)}\right)P\left(w^{(2)}|w^{(1)}\right)P\left(w^{(1)}\right)$<br>同样可以考虑前n-1个词的关系，但是，随着n的增大，模型复杂度也会随之增大。因为，实际应用中如何选择一个好的n也很有讲究，这在Machine Learning中被称为Bias-Variance Trade-off。实际应用中，我们组的师兄一般用Binary Gram或者Triple Gram就可以表达足够的信息了。</p>
 <h1 id="2-A_Simple_Neural_Network_Model_for_Word_Embedding">2.A Simple Neural Network Model for Word Embedding</h1><p>我们在既然讨论了语言模型，就想把语言模型的idea用来构建神经网络，以此对词进行表示。在n-gram模型中，我们用前n-1个词来对第n个词进行表示。那么在神经网络中我们也可以这么做，我们的输入是n-1个词的One-hot Vectors，预测输出是第n个词。如何在一个句子中有多少个这样的神经网络呢，我们来举个例子，对于下面这个句子：</p>
 <blockquote>
 <p>Word embedding is the collective name for a set of language modeling and feature learning techniques in natural language processing where words from the vocabulary…</p>
