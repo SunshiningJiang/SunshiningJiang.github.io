@@ -5,15 +5,15 @@
   
   <title>Word Embedding:An Introduction and Its Application in Sentence Parsing - Part 3 | SunShining</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="今天我们来介绍一个idea很赞的神经网络模型，也解决就是上一篇博客留下的一个问题：无论是简单的神经网络，CBOW模型亦或者Skip－Gram模型，我们的输出层大小都是$$$|V|$$$。$$$V$$$是指整个词典的大小。有同学会问我们为什么要把output层设计这么长，直接使得$$$P(Target|Inputs)$$$大一些不就好了嘛。在CBOW模型中，Inputs就是上下文，Output就是中">
+  <meta name="description" content="今天我们来介绍一个idea很赞的神经网络模型，也解决就是上一篇博客留下的一个问题：无论是简单的神经网络，CBOW模型亦或者Skip－Gram模型，我们的输出层大小都是$|V|$。$V$是指整个词典的大小。有同学会问我们为什么要把output层设计这么长，直接使得$P(Target|Inputs)$大一些不就好了嘛。在CBOW模型中，Inputs就是上下文，Output就是中间词；而在Skip－Gr">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Word Embedding:An Introduction and Its Application in Sentence Parsing - Part 3">
 <meta property="og:url" content="http://yoursite.com/2015/05/20/Word-Embedding-An-Introduction-and-Its-Application-in-Sentence-Parsing-Part-3/index.html">
 <meta property="og:site_name" content="SunShining">
-<meta property="og:description" content="今天我们来介绍一个idea很赞的神经网络模型，也解决就是上一篇博客留下的一个问题：无论是简单的神经网络，CBOW模型亦或者Skip－Gram模型，我们的输出层大小都是$$$|V|$$$。$$$V$$$是指整个词典的大小。有同学会问我们为什么要把output层设计这么长，直接使得$$$P(Target|Inputs)$$$大一些不就好了嘛。在CBOW模型中，Inputs就是上下文，Output就是中">
+<meta property="og:description" content="今天我们来介绍一个idea很赞的神经网络模型，也解决就是上一篇博客留下的一个问题：无论是简单的神经网络，CBOW模型亦或者Skip－Gram模型，我们的输出层大小都是$|V|$。$V$是指整个词典的大小。有同学会问我们为什么要把output层设计这么长，直接使得$P(Target|Inputs)$大一些不就好了嘛。在CBOW模型中，Inputs就是上下文，Output就是中间词；而在Skip－Gr">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Word Embedding:An Introduction and Its Application in Sentence Parsing - Part 3">
-<meta name="twitter:description" content="今天我们来介绍一个idea很赞的神经网络模型，也解决就是上一篇博客留下的一个问题：无论是简单的神经网络，CBOW模型亦或者Skip－Gram模型，我们的输出层大小都是$$$|V|$$$。$$$V$$$是指整个词典的大小。有同学会问我们为什么要把output层设计这么长，直接使得$$$P(Target|Inputs)$$$大一些不就好了嘛。在CBOW模型中，Inputs就是上下文，Output就是中">
+<meta name="twitter:description" content="今天我们来介绍一个idea很赞的神经网络模型，也解决就是上一篇博客留下的一个问题：无论是简单的神经网络，CBOW模型亦或者Skip－Gram模型，我们的输出层大小都是$|V|$。$V$是指整个词典的大小。有同学会问我们为什么要把output层设计这么长，直接使得$P(Target|Inputs)$大一些不就好了嘛。在CBOW模型中，Inputs就是上下文，Output就是中间词；而在Skip－Gr">
   
     <link rel="alternative" href="/atom.xml" title="SunShining" type="application/atom+xml">
   
@@ -214,7 +214,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>今天我们来介绍一个idea很赞的神经网络模型，也解决就是上一篇博客留下的一个问题：无论是简单的神经网络，CBOW模型亦或者Skip－Gram模型，我们的输出层大小都是$$$|V|$$$。$$$V$$$是指整个词典的大小。有同学会问我们为什么要把output层设计这么长，直接使得$$$P(Target|Inputs)$$$大一些不就好了嘛。在CBOW模型中，Inputs就是上下文，Output就是中间词；而在Skip－Gram模型中，Inputs是中间词，Output是上下文。但是这里我们要知道，“大”的定义是相对性的，我们的目的是让Target比换成其它词的概率要大。因此我们才会把Score通过SoftMax函数转换成概率，这样就可以来</p>
+        <p>今天我们来介绍一个idea很赞的神经网络模型，也解决就是上一篇博客留下的一个问题：无论是简单的神经网络，CBOW模型亦或者Skip－Gram模型，我们的输出层大小都是$|V|$。$V$是指整个词典的大小。有同学会问我们为什么要把output层设计这么长，直接使得$P(Target|Inputs)$大一些不就好了嘛。在CBOW模型中，Inputs就是上下文，Output就是中间词；而在Skip－Gram模型中，Inputs是中间词，Output是上下文。但是这里我们要知道，“大”的定义是相对性的，我们的目的是让Target比换成其它词的概率要大。因此我们才会把Score通过SoftMax函数转换成概率，这样就可以来</p>
 
       
     </div>
