@@ -3,18 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>An Introduction to EM Algorithm | SunShining</title>
+  <title>SunShining</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="机器学习主要研究如何搭建模型和如何求解模型得到参数，我们知道，在有监督学习的问题当中，模型中所有的变量（variable）都是observed的，我们可以通过变量之间的关系构建似然函数（likelihood），然后最大化似然函数（maximize likelihood）得到参数。比如，在分类问题中，模型中的变量（variable）是输入$X$以及输出$Y$，我们可以构建如下case 1的图模型用来">
+  <meta name="description" content="A blog of a machine learning learner @ShanghaiTech University">
 <meta property="og:type" content="website">
-<meta property="og:title" content="An Introduction to EM Algorithm">
-<meta property="og:url" content="http://yoursite.com/drafts/An-Introduction-to-EM-Algorithm.html">
+<meta property="og:title" content="SunShining">
+<meta property="og:url" content="http://yoursite.com/tags/Unsupervised-learning/index.html">
 <meta property="og:site_name" content="SunShining">
-<meta property="og:description" content="机器学习主要研究如何搭建模型和如何求解模型得到参数，我们知道，在有监督学习的问题当中，模型中所有的变量（variable）都是observed的，我们可以通过变量之间的关系构建似然函数（likelihood），然后最大化似然函数（maximize likelihood）得到参数。比如，在分类问题中，模型中的变量（variable）是输入$X$以及输出$Y$，我们可以构建如下case 1的图模型用来">
-<meta property="og:image" content="http://ww4.sinaimg.cn/mw690/6dfbc26fjw1erx14zl3ayj210e0t2779.jpg">
+<meta property="og:description" content="A blog of a machine learning learner @ShanghaiTech University">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="An Introduction to EM Algorithm">
-<meta name="twitter:description" content="机器学习主要研究如何搭建模型和如何求解模型得到参数，我们知道，在有监督学习的问题当中，模型中所有的变量（variable）都是observed的，我们可以通过变量之间的关系构建似然函数（likelihood），然后最大化似然函数（maximize likelihood）得到参数。比如，在分类问题中，模型中的变量（variable）是输入$X$以及输出$Y$，我们可以构建如下case 1的图模型用来">
+<meta name="twitter:title" content="SunShining">
+<meta name="twitter:description" content="A blog of a machine learning learner @ShanghaiTech University">
   
     <link rel="alternative" href="/atom.xml" title="SunShining" type="application/atom+xml">
   
@@ -182,93 +181,51 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+      <div class="body-wrap">
   
-    <div class="article-meta">
-      <a href="/drafts/An-Introduction-to-EM-Algorithm.html" class="article-date">
-  	<time datetime="2015-05-08T09:43:29.000Z" itemprop="datePublished">2015-05-08</time>
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2015" class="archive-year">2015</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2015/05/30/Principal-Component-Analysis-PCA/" class="archive-article-date">
+  	<time datetime="2015-05-30T15:37:54.000Z" itemprop="datePublished">5月 30</time>
 </a>
-    </div>
+        </div>
+    	 
   
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      An Introduction to EM Algorithm
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2015/05/30/Principal-Component-Analysis-PCA/">Principal Component Analysis(PCA)</a>
     </h1>
   
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/">undefined</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/">undefined</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/">undefined</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dimension-reduction/">Dimension reduction</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unsupervised-learning/">Unsupervised learning</a></li></ul>
 	</div>
 
-        
+          
 
+        </div>
         <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>机器学习主要研究如何搭建模型和如何求解模型得到参数，我们知道，在有监督学习的问题当中，模型中所有的变量（variable）都是observed的，我们可以通过变量之间的关系构建似然函数（likelihood），然后最大化似然函数（maximize likelihood）得到参数。比如，在分类问题中，模型中的变量（variable）是输入$X$以及输出$Y$，我们可以构建如下case 1的图模型用来表示，这里Y是离散值。我们可以认为每一类都服从协方差相同的Gaussion分布，这样对整个数据的联合概率进行建模的机器学习模型被称为高斯判别分析（Gaussion Discriminant Analysis）。<br><img src="http://ww4.sinaimg.cn/mw690/6dfbc26fjw1erx14zl3ayj210e0t2779.jpg" alt="图模型表示"></p>
-
-      
-    </div>
-    
+    </header>
   </div>
-  
-    
-  
 </article>
-
-
-<div class="share">
-	<!-- JiaThis Button BEGIN -->
-	<div class="jiathis_style">
-		<span class="jiathis_txt">分享到：</span>
-		<a class="jiathis_button_tsina"></a>
-		<a class="jiathis_button_cqq"></a>
-		<a class="jiathis_button_douban"></a>
-		<a class="jiathis_button_weixin"></a>
-		<a class="jiathis_button_tumblr"></a>
-		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-	</div>
-	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
-	<!-- JiaThis Button END -->
-</div>
-
-
-
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="undefined" data-title="An Introduction to EM Algorithm" data-url="http://yoursite.com/drafts/An-Introduction-to-EM-Algorithm.html"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"true"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-
-
+  
+  
+    </div></section>
+  
 </div>
       <footer id="footer">
   <div class="outer">
