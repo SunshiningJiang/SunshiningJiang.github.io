@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Word Embedding:An Introduction and Its Application in Sentence Parsing - Part 3 | SunShining</title>
+  <title>Principal Component Analysis(PCA) | SunShining</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="今天我们来介绍一个idea很赞的神经网络模型，也解决就是上一篇博客留下的一个问题：无论是简单的神经网络，CBOW模型亦或者Skip－Gram模型，我们的输出层大小都是$|V|$。$V$是指整个词典的大小。有同学会问我们为什么要把output层设计这么长，直接使得$P(Target|Inputs)$大一些不就好了嘛。在CBOW模型中，Inputs就是上下文，Output就是中间词；而在Skip－Gr">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Word Embedding:An Introduction and Its Application in Sentence Parsing - Part 3">
-<meta property="og:url" content="http://yoursite.com/2015/05/20/Word-Embedding-An-Introduction-and-Its-Application-in-Sentence-Parsing-Part-3/index.html">
+  <meta name="description" content="目前在上马老师计算机视觉的课，记录一些内容吧！记忆力比较差= =，希望能够加深理解。PCA中文翻译：主成分分析，很直白地表达了这个算法的意思。我们知道，在实际问题中，我们得到的数据很大程度上维数(D)很高，数据的特征直接的相关性很大，而且因在采集数据时的不规范或者不小心等误差，会产生很多噪声。这样不利于我们以后的数据分析和处理，因此我们希望先对数据预处理一下，将高维的原始数据降到一个低维度的空间里">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Principal Component Analysis(PCA)">
+<meta property="og:url" content="http://yoursite.com/drafts/Principal-Component-Analysis-PCA.html">
 <meta property="og:site_name" content="SunShining">
-<meta property="og:description" content="今天我们来介绍一个idea很赞的神经网络模型，也解决就是上一篇博客留下的一个问题：无论是简单的神经网络，CBOW模型亦或者Skip－Gram模型，我们的输出层大小都是$|V|$。$V$是指整个词典的大小。有同学会问我们为什么要把output层设计这么长，直接使得$P(Target|Inputs)$大一些不就好了嘛。在CBOW模型中，Inputs就是上下文，Output就是中间词；而在Skip－Gr">
+<meta property="og:description" content="目前在上马老师计算机视觉的课，记录一些内容吧！记忆力比较差= =，希望能够加深理解。PCA中文翻译：主成分分析，很直白地表达了这个算法的意思。我们知道，在实际问题中，我们得到的数据很大程度上维数(D)很高，数据的特征直接的相关性很大，而且因在采集数据时的不规范或者不小心等误差，会产生很多噪声。这样不利于我们以后的数据分析和处理，因此我们希望先对数据预处理一下，将高维的原始数据降到一个低维度的空间里">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Word Embedding:An Introduction and Its Application in Sentence Parsing - Part 3">
-<meta name="twitter:description" content="今天我们来介绍一个idea很赞的神经网络模型，也解决就是上一篇博客留下的一个问题：无论是简单的神经网络，CBOW模型亦或者Skip－Gram模型，我们的输出层大小都是$|V|$。$V$是指整个词典的大小。有同学会问我们为什么要把output层设计这么长，直接使得$P(Target|Inputs)$大一些不就好了嘛。在CBOW模型中，Inputs就是上下文，Output就是中间词；而在Skip－Gr">
+<meta name="twitter:title" content="Principal Component Analysis(PCA)">
+<meta name="twitter:description" content="目前在上马老师计算机视觉的课，记录一些内容吧！记忆力比较差= =，希望能够加深理解。PCA中文翻译：主成分分析，很直白地表达了这个算法的意思。我们知道，在实际问题中，我们得到的数据很大程度上维数(D)很高，数据的特征直接的相关性很大，而且因在采集数据时的不规范或者不小心等误差，会产生很多噪声。这样不利于我们以后的数据分析和处理，因此我们希望先对数据预处理一下，将高维的原始数据降到一个低维度的空间里">
   
     <link rel="alternative" href="/atom.xml" title="SunShining" type="application/atom+xml">
   
@@ -181,11 +181,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-Word-Embedding-An-Introduction-and-Its-Application-in-Sentence-Parsing-Part-3" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/05/20/Word-Embedding-An-Introduction-and-Its-Application-in-Sentence-Parsing-Part-3/" class="article-date">
-  	<time datetime="2015-05-20T05:16:57.000Z" itemprop="datePublished">2015-05-20</time>
+      <a href="/drafts/Principal-Component-Analysis-PCA.html" class="article-date">
+  	<time datetime="2015-05-30T15:37:54.000Z" itemprop="datePublished">2015-05-30</time>
 </a>
     </div>
   
@@ -198,7 +198,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Word Embedding:An Introduction and Its Application in Sentence Parsing - Part 3
+      Principal Component Analysis(PCA)
     </h1>
   
 
@@ -206,6 +206,10 @@
       
       <div class="article-info article-info-post">
         
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/">undefined</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/">undefined</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/">undefined</a></li></ul>
+	</div>
+
         
 
         <div class="clearfix"></div>
@@ -214,7 +218,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>今天我们来介绍一个idea很赞的神经网络模型，也解决就是上一篇博客留下的一个问题：无论是简单的神经网络，CBOW模型亦或者Skip－Gram模型，我们的输出层大小都是$|V|$。$V$是指整个词典的大小。有同学会问我们为什么要把output层设计这么长，直接使得$P(Target|Inputs)$大一些不就好了嘛。在CBOW模型中，Inputs就是上下文，Output就是中间词；而在Skip－Gram模型中，Inputs是中间词，Output是上下文。但是这里我们要知道，“大”的定义是相对性的，我们的目的是让Target比换成其它词的概率要大。因此我们才会把Score通过SoftMax函数转换成概率，这样就可以来</p>
+        <p>目前在上马老师计算机视觉的课，记录一些内容吧！记忆力比较差<code>= =</code>，希望能够加深理解。<br>PCA中文翻译：主成分分析，很直白地表达了这个算法的意思。我们知道，在实际问题中，我们得到的数据很大程度上维数(D)很高，数据的特征直接的相关性很大，而且因在采集数据时的不规范或者不小心等误差，会产生很多噪声。这样不利于我们以后的数据分析和处理，因此我们希望先对数据预处理一下，将高维的原始数据降到一个低维度的空间里，当然我们希望能够在低维度的空间下能够最大程度地保存原始数据的信息，去除噪声。接下来的所有数学分析都为了求解如何来得到这样的投影。不同领域的人对PCA的理解也不一样，马毅老师的GPCA书里给出了如下几个对PCA的理解：</p>
+<h1 id="1-_统计的视角">1. 统计的视角</h1><p>我们可以把D维空间的数据的产生过程看成对一个随机向量$x \in R^{D}$的一个采样。我们希望分析构成这个随机变量$x$的一些主成分：$y \in R^{d}$，而且这$d$个主成分之间的方差越大越好。因此，对于每一个$y_i$，我们可以用如下的式子得到，<br>$$y_i = u_i^{T}x,u_i \in R^{D},~i=1,2,…,d$$</p>
+<p>$$Subject to:<del>u_i^{T}t_i=1</del>And<del>Var\left(y_1\right) \geq Var\left(y_2\right) \geq … \geq \left(y_d\right) \geq 0$$<br>比如，我们希望找到第一个主成分$y_1$，那目标函数就变成：<br>$$u_1^{*}=argmax_{u_1 \in R^{D}} Var \left(u_1^{T}x\right)</del>~s.t.~u_1^{T}u_1=1$$<br>求解这个式子，可以得到：<br>$\sum_x u_1 =\lambda_1u_1~~~~u_1^{T}u_1=1$</p>
 
       
     </div>
@@ -222,16 +228,6 @@
   </div>
   
     
-<nav id="article-nav">
-  
-  
-    <a href="/2015/05/16/Word-Embedding-An-Introduction-and-Its-Application-in-Sentence-Parsing-Part-2/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Word Embedding:An Introduction and Its Application in Sentence Parsing - Part 2</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
-
   
 </article>
 
@@ -255,7 +251,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Word-Embedding-An-Introduction-and-Its-Application-in-Sentence-Parsing-Part-3" data-title="Word Embedding:An Introduction and Its Application in Sentence Parsing - Part 3" data-url="http://yoursite.com/2015/05/20/Word-Embedding-An-Introduction-and-Its-Application-in-Sentence-Parsing-Part-3/"></div>
+	<div class="ds-thread" data-thread-key="undefined" data-title="Principal Component Analysis(PCA)" data-url="http://yoursite.com/drafts/Principal-Component-Analysis-PCA.html"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
