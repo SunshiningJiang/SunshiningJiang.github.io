@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>SunShining</title>
+  <title>Principal Component Analysis(PCA) | SunShining</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="A blog of a machine learning learner @ShanghaiTech University">
+  <meta name="description" content="目前在上马老师计算机视觉的课，记录一些内容吧！记忆力比较差= =，希望能够加深理解。PCA中文翻译：主成分分析，很直白地表达了这个算法的意思。我们知道，在实际问题中，我们得到的数据很大程度上维数(D)很高，数据的特征直接的相关性很大，而且因在采集数据时的不规范或者不小心等误差，会产生很多噪声。这样不利于我们以后的数据分析和处理，因此我们希望先对数据预处理一下，将高维的原始数据降到一个低维度的空间里">
 <meta property="og:type" content="website">
-<meta property="og:title" content="SunShining">
-<meta property="og:url" content="http://yoursite.com/tags/learning/index.html">
+<meta property="og:title" content="Principal Component Analysis(PCA)">
+<meta property="og:url" content="http://yoursite.com/drafts/Principal-Component-Analysis-PCA.html">
 <meta property="og:site_name" content="SunShining">
-<meta property="og:description" content="A blog of a machine learning learner @ShanghaiTech University">
+<meta property="og:description" content="目前在上马老师计算机视觉的课，记录一些内容吧！记忆力比较差= =，希望能够加深理解。PCA中文翻译：主成分分析，很直白地表达了这个算法的意思。我们知道，在实际问题中，我们得到的数据很大程度上维数(D)很高，数据的特征直接的相关性很大，而且因在采集数据时的不规范或者不小心等误差，会产生很多噪声。这样不利于我们以后的数据分析和处理，因此我们希望先对数据预处理一下，将高维的原始数据降到一个低维度的空间里">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SunShining">
-<meta name="twitter:description" content="A blog of a machine learning learner @ShanghaiTech University">
+<meta name="twitter:title" content="Principal Component Analysis(PCA)">
+<meta name="twitter:description" content="目前在上马老师计算机视觉的课，记录一些内容吧！记忆力比较差= =，希望能够加深理解。PCA中文翻译：主成分分析，很直白地表达了这个算法的意思。我们知道，在实际问题中，我们得到的数据很大程度上维数(D)很高，数据的特征直接的相关性很大，而且因在采集数据时的不规范或者不小心等误差，会产生很多噪声。这样不利于我们以后的数据分析和处理，因此我们希望先对数据预处理一下，将高维的原始数据降到一个低维度的空间里">
   
     <link rel="alternative" href="/atom.xml" title="SunShining" type="application/atom+xml">
   
@@ -181,51 +181,96 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/04/05/Resources-of-machine-learning/" class="archive-article-date">
-  	<time datetime="2015-04-05T11:10:15.000Z" itemprop="datePublished">4月 5</time>
+    <div class="article-meta">
+      <a href="/drafts/Principal-Component-Analysis-PCA.html" class="article-date">
+  	<time datetime="2015-05-30T15:37:54.000Z" itemprop="datePublished">2015-05-30</time>
 </a>
-        </div>
-    	 
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/04/05/Resources-of-machine-learning/">Resources of machine learning</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Principal Component Analysis(PCA)
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-learning/">Machine learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/learning/">learning</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/">undefined</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/">undefined</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/">undefined</a></li></ul>
 	</div>
 
-          
+        
 
-        </div>
         <div class="clearfix"></div>
-    </header>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>目前在上马老师计算机视觉的课，记录一些内容吧！记忆力比较差<code>= =</code>，希望能够加深理解。<br>PCA中文翻译：主成分分析，很直白地表达了这个算法的意思。我们知道，在实际问题中，我们得到的数据很大程度上维数(D)很高，数据的特征直接的相关性很大，而且因在采集数据时的不规范或者不小心等误差，会产生很多噪声。这样不利于我们以后的数据分析和处理，因此我们希望先对数据预处理一下，将高维的原始数据降到一个低维度的空间里，当然我们希望能够在低维度的空间下能够最大程度地保存原始数据的信息，去除噪声。接下来的所有数学分析都为了求解如何来得到这样的投影。不同领域的人对PCA的理解也不一样，马毅老师的GPCA书里给出了如下几个对PCA的理解：</p>
+<h1 id="1-_统计的视角">1. 统计的视角</h1><p>我们可以把D维空间的数据的产生过程看成对一个随机向量$x \in R^{D}$的一个采样。我们希望分析构成这个随机变量$x$的一些主成分：$y \in R^{d}$，而且这$d$个主成分之间的方差越大越好。因此，对于每一个$y_i$，我们可以通过如下的式子得到，</p>
+<p>$$y_i = u_i^{T}x,\quad u_i \in R^{D},\quad i=1,2,…,d\\$$<br>我们加上人为的constrains，保证投影向量$u_i$是单位向量，而且为了方便起见，我们令d个主成分$y_i$从大到小排列。因此，<br>\begin{aligned}<br>u_i^{T}x_i=1 \quad  \quad Var\left(y_1\right) \geq Var\left(y_2\right) \geq … \geq \left(y_d\right) \geq 0<br>\end{aligned}</p>
+<p>比如，我们希望找到第一个主成分$y_1$，那目标函数就变成：<br>$$u_1^{*}=argmax_{u_1 \in R^{D}} Var \left(u_1^{T}x\right)\quad s.t.\quad u_1^{T}u_1=1$$<br>求解这个式子，可以得到：<br>$\Sigma_x u_1 =\lambda_1u_1\quad u_1^{T}u_1=1$<br>因此$u_1$的最优解就是$\Sigma_x$最大特征值$\lambda_1$对应的特征值。接下来我们希望找到$u_2,u_3,..,u_d$，为了保证不同主成分的差异最大化，我们希望变量$y_i$和变量$y_j$直接没有关系，即他们之积的方差为0。可以得到：<br>$$Var\left(y_iy_j\right)=E[u_i^{T}xx^{T}u_j]=u_i^{T}\Sigma_xu_j=\lambda_ju_i^{T}u_j=0$$<br>可以得到$u_i$和$u_j$是正交的关系。<br>因此，我们可以通过以下手段计算$u_i$，<br>$$\mathcal{L}=u_i^{T}\Sigma_xu_i+\lambda_i\left(1-u_i^{T}u_i\right)+\sum_{j=1}^{i-1}\gamma_ju_i^{T}u_j$$</p>
+
+      
+    </div>
+    
   </div>
+  
+    
+  
 </article>
-  
-  
-    </div></section>
-  
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="undefined" data-title="Principal Component Analysis(PCA)" data-url="http://yoursite.com/drafts/Principal-Component-Analysis-PCA.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 </div>
       <footer id="footer">
   <div class="outer">
