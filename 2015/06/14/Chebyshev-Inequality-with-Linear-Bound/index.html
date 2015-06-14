@@ -228,8 +228,8 @@ Chebyshev不等式：假设t是非负随机变量，对于任意的$\alpha&amp;g
 <blockquote>
 <p>Chebyshev不等式：假设t是非负随机变量，对于任意的$\alpha&gt;0$，我们都有：$P[t\geq \alpha]\leq \frac{E \left(t\right)}{\alpha}$</p>
 </blockquote>
-<p>证明如下：<br>我们定义一个集合$A\subset \Omega:A=\{s\in \Omega | X\left(s\right)\geq a\}$,因此：</p>
-<p>$$E\left(X\right)=\sum_{s\in \Omega}P\left(s\right)X\left(s\right)=\sum_{s\in A}P\left(s\right)X\left(s\right)+\sum_{s\notin A}P\left(s\right)X\left(s\right)\leq \sum_{s\in A}P\left(s\right)X\left(s\right)\\<br>\leq\sum_{s\in A}P\left(s\right)a = a P\left(A\right)$$<br>得证！<br>下面是俩推论：<br>1.随机变量$u$的均值是$\mu$，方差是$\sigma ^2$，因此可得，对任意$\alpha$，$P[\left(u-\mu\right)^2\geq \alpha]\leq \frac{\sigma^2}{\alpha}$<br>2.$u_1,u_2,…,u_N$是独立同分布的一组随机变量，每一个变量的均值都是$\mu$，方差是$\sigma^2$，定义新的随机变量$u=\frac{1}{N}\sum_{n=1}^{N}u_n$，对任意的$\alpha&gt;0$，都有：$P[\left(u-\mu\right)^2\geq \alpha]\leq \frac{\sigma^2}{N\alpha}$</p>
+<p>证明如下：<br>我们定义一个集合$A\subset \Omega:A=\{t\in \Omega | t\geq a\}$,因此：</p>
+<p>$$E\left(t\right)=\sum_{t\in \Omega}P\left(t\right)t=\sum_{t\in A}P\left(t\right)t+\sum_{t\notin A}P\left(t\right)t\leq \sum_{t\in A}P\left(t\right)t\\<br>\leq\sum_{t\in A}P\left(t\right)a = a P\left(A\right)$$<br>得证！<br>下面是俩推论：<br>1.随机变量$u$的均值是$\mu$，方差是$\sigma ^2$，因此可得，对任意$\alpha$，$P[\left(u-\mu\right)^2\geq \alpha]\leq \frac{\sigma^2}{\alpha}$<br>2.$u_1,u_2,…,u_N$是独立同分布的一组随机变量，每一个变量的均值都是$\mu$，方差是$\sigma^2$，定义新的随机变量$u=\frac{1}{N}\sum_{n=1}^{N}u_n$，对任意的$\alpha&gt;0$，都有：$P[\left(u-\mu\right)^2\geq \alpha]\leq \frac{\sigma^2}{N\alpha}$</p>
 
       
     </div>
