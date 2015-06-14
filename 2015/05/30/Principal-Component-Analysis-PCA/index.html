@@ -219,7 +219,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>目前在上马老师计算机视觉的课，记录一些内容吧！记忆力比较差<code>= =</code>，希望能够加深理解。<br>PCA中文翻译：主成分分析，很直白地表达了这个算法的意思。我们知道，在实际问题中，我们得到的数据很大程度上维数(D)很高，数据的特征直接的相关性很大，而且因在采集数据时的不规范或者不小心等误差，会产生很多噪声。这样不利于我们以后的数据分析和处理，因此我们希望先对数据预处理一下，将高维的原始数据降到一个低维度的空间里，当然我们希望能够在低维度的空间下能够最大程度地保存原始数据的信息，去除噪声。接下来的所有数学分析都为了求解如何来得到这样的投影。不同领域的人对PCA的理解也不一样，马毅老师的GPCA书里给出了如下几个对PCA的理解：</p>
-<h1 id="1-_统计的视角">1. 统计的视角</h1><p>我们可以把D维空间的数据的产生过程看成对一个随机向量$x \in R^{D}$的一个采样。我们希望分析构成这个随机变量$x$的一些主成分：$y \in R^{d}$，而且这$d$个主成分之间的方差越大越好。因此，对于每一个$y_i$，我们可以用如下的式子得到，<br>\begin{aligned}<br>y_i = u_i^{T}x,u_i \in R^{D},~i=1,2,…,d<br>Subject to:<del>u_i^{T}t_i=1</del>And~~Var\left(y_1\right) \geq Var\left(y_2\right) \geq … \geq \left(y_d\right) \geq 0<br>\end{aligned}</p>
+<h1 id="1-_统计的视角">1. 统计的视角</h1><p>我们可以把D维空间的数据的产生过程看成对一个随机向量$x \in R^{D}$的一个采样。我们希望分析构成这个随机变量$x$的一些主成分：$y \in R^{d}$，而且这$d$个主成分之间的方差越大越好。因此，对于每一个$y_i$，我们可以用如下的式子得到，<br>\begin{aligned}<br>y_i = u_i^{T}x,u_i \in R^{D},~i=1,2,…,d\\<br>Subject to:<del>u_i^{T}t_i=1</del>And~~Var\left(y_1\right) \geq Var\left(y_2\right) \geq … \geq \left(y_d\right) \geq 0<br>\end{aligned}</p>
 <p>比如，我们希望找到第一个主成分$y_1$，那目标函数就变成：<br>$$u_1^{*}=argmax_{u_1 \in R^{D}} Var \left(u_1^{T}x\right)<del>~s.t.~u_1^{T}u_1=1$$<br>求解这个式子，可以得到：<br>$\sum_x u_1 =\lambda_1u_1</del>~~u_1^{T}u_1=1$</p>
 
       
